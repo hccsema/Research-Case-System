@@ -1,0 +1,58 @@
+package oil.service;
+
+
+import oil.model.User;
+import oil.repository.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+/**
+ * Created by  waiter on 18-6-18.
+ * @author waiter
+ */
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class UserDetailsServiceImpl implements UserDetailsService {
+    @Autowired
+    private UserDao userDao;
+
+    public Object findByUserName(String username){
+        return userDao.findByUserName(username);
+    }
+
+
+
+
+    public User save(User user){return userDao.save(user);}
+
+    /**
+     * 用户登录认证
+     * @param s
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = userDao.findByUserName(s);
+        if(user == null){
+
+            throw new UsernameNotFoundException("user not found");
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.getAuthorities());
+    }
+
+
+    public User findById(int id){
+        return userDao.findById(id);
+    }
+
+    public void saveAll(Iterable<User> list ){
+        userDao.saveAll(list);
+    }
+}
