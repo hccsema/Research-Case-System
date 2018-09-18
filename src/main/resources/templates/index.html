@@ -1,12 +1,43 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
 <head>
-    <title>TEST</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
 </head>
 <body>
-<h1>Welcome![[${#httpServletRequest.remoteUser}]]!</h1>
-
-<p>Click <a th:href="@{/index}">here</a> to see a greeting.</p>
-
+    <div>
+        <div style="width: 5%;float: left">
+            <img src="images/logo.jpg" width="60px" style="margin-top: 17px"/>
+        </div>
+        <div style="width: 55%;float: left;margin-top: 15px">
+            <h5 style="line-height: 0.5px"><b>石油与天然气工程专业学位课程——采油采气工程设计与应用</b></h5>
+            <h3><b>研究生课程教学案例库</b></h3>
+        </div>
+        <div style="width: 40%;float: left">
+            <div class="input-group" style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 28px">
+                <input type="text" class="form-control"placeholder="请输入文档名"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 100px">
+        <ul class="nav nav-pills" style="background: #337AB7;">
+            <li class="active"><a href="#" style="color: white">网站首页</a></li>
+            <li class="active"><a href="#" style="color: white">完井设计</a></li>
+            <li class="active"><a href="#" style="color: white">抽井举升</a></li>
+            <li class="active"><a href="#" style="color: white">采气工艺</a></li>
+            <li class="active"><a href="#" style="color: white">注水工艺</a></li>
+            <li class="active"><a href="#" style="color: white">增产措施</a></li>
+            <li class="active"><a href="#" style="color: white">防莎设计</a></li>
+            <li class="active"><a href="#" style="color: white">总体设计</a></li>
+        </ul>
+    </div>
 </body>
 </html>
