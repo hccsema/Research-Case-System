@@ -2,8 +2,10 @@ package oil.controller;
 
 import oil.model.Role;
 import oil.model.User;
+import oil.service.RoleService;
 import oil.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,18 +21,22 @@ import java.util.ArrayList;
 public class UserController {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private RoleService roleService;
 
     @ResponseBody
     @GetMapping(value = "/add/user")
     public User addUser(){
         User user = new User();
         user.setUserName("123456");
-        user.setPassWord("123456");
+        user.setPassWord(bCryptPasswordEncoder.encode("123456"));
         user.setNonExpired(true);
         user.setNonLocked(true);
         user.setNickName("测试");
         ArrayList<Role> objects = new ArrayList<>();
-        objects.add(new Role("ROLE_USER"));
+        objects.add(roleService.findById(4));
         user.setAuthorities(objects);
         return userDetailsService.save(user);
     }

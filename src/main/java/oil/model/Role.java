@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id ;
+    private Integer id ;
     /**
      * 用户权限
      *
