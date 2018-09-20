@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Title {
+public class Lib{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -25,4 +25,7 @@ public class Title {
      * 简介
      */
     private String introduction;
+
+    private Long times;
+
 }

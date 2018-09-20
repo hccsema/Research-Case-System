@@ -1,7 +1,10 @@
 package oil;
 
+import oil.model.Doc;
 import oil.model.Role;
 import oil.model.User;
+import oil.service.CaseService;
+import oil.service.DocService;
 import oil.service.UserDetailsServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +18,16 @@ import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional(rollbackFor = Exception.class)
 public class OilApplicationTests {
 
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
+    @Autowired
+    private DocService docService;
+    @Autowired
+    private CaseService caseService;
 
     @Test
     @Transactional(rollbackFor = Exception.class)
@@ -34,6 +42,14 @@ public class OilApplicationTests {
         objects.add(new Role("ROLE_USER"));
         user.setAuthorities(objects);
         userDetailsServiceImpl.save(user);
+    }
+
+    @Test
+    public void T1(){
+        Doc doc = new Doc();
+        doc.setName("001");
+        doc.setPath("ssasss");
+        docService.save(doc);
     }
 
 }

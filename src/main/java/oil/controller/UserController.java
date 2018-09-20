@@ -26,18 +26,5 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
-    @ResponseBody
-    @GetMapping(value = "/add/user")
-    public User addUser(){
-        User user = new User();
-        user.setUserName("123456");
-        user.setPassWord(bCryptPasswordEncoder.encode("123456"));
-        user.setNonExpired(true);
-        user.setNonLocked(true);
-        user.setNickName("测试");
-        ArrayList<Role> objects = new ArrayList<>();
-        objects.add(roleService.findById(4));
-        user.setAuthorities(objects);
-        return userDetailsService.save(user);
-    }
+
 }

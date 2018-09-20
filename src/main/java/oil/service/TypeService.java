@@ -1,0 +1,23 @@
+package oil.service;
+
+import oil.model.Type;
+import oil.repository.TypeDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+
+/**
+ * Created by  waiter on 18-9-19  下午8:10.
+ *
+ * @author waiter
+ */
+@Service
+public class TypeService {
+    @Autowired
+    private TypeDao typeDao;
+
+    public ArrayList<Type> findAll(){
+        return typeDao.findAllByIsExistOrderByGradeAsc(true);
+    }
+}
