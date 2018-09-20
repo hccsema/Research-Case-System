@@ -18,4 +18,8 @@ public class DocService {
     public void save(Doc doc){
         docDao.save(doc);
     }
+
+    public Doc findById(Long id){
+        return docDao.getOne(id);
+    }
 }

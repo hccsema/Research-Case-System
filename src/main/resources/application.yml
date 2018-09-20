@@ -55,3 +55,12 @@ spring:
 
 doc:
   path: /home/waiter/logs
+
+
+logging:
+  file: water.log
+  path: /home/waiter/logs
+  level:
+    org: warn
+    org.springframework: warn
+    oil: trace

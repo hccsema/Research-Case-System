@@ -11,4 +11,5 @@ import java.util.ArrayList;
  * @author waiter
  */
 public interface DocDao extends JpaRepository<Doc,Long> {
+
 }
