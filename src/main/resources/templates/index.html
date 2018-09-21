@@ -34,9 +34,57 @@
         <ul class="nav nav-pills" style="background: #337AB7;">
             <li class="active"><a href="#" style="color: white">网站首页</a></li>
             <li class="active" th:each="m:${#servletContext.getAttribute('types')}" >
-                <a th:text="${m.name}" href="#" style="color: white">总体设计</a>
+                <a th:text="${m.name}" href="#" style="color: white"></a>
             </li>
         </ul>
+    </div>
+    <div>
+        <div style="width: 68%;height: auto;float: left;margin: 0.5%">
+            <div th:each="m:${#servletContext.getAttribute('types')}">
+                <div class="panel panel-default" style="margin: 0.5%;float: left;width: 49%">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" th:text="${m.name}"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 30%;height: auto;float: left;margin: 0.5%;">
+            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+                <div class="panel-heading">
+                    <h3 class="panel-title">案例库简介</h3>
+                </div>
+                <div class="panel-body">
+                    <p></p>
+                </div>
+            </div>
+            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+                <div class="panel-heading">
+                    <h3 class="panel-title">案例库统计</h3>
+                </div>
+                <div class="panel-body">
+                    <p></p>
+                </div>
+            </div>
+            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+                <div class="panel-heading">
+                    <h3 class="panel-title">标签</h3>
+                </div>
+                <div class="panel-body">
+                    <p></p>
+                </div>
+            </div>
+            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+                <div class="panel-heading">
+                    <h3 class="panel-title">日期归档</h3>
+                </div>
+                <div class="panel-body">
+                    <p></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
