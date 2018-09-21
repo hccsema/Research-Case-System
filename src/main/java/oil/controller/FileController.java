@@ -30,6 +30,7 @@ import java.util.List;
  * @author waiter
  */
 @Controller
+@RequestMapping(value = "/file")
 public class FileController {
     @Autowired
     private DocService docService;
@@ -49,8 +50,9 @@ public class FileController {
      */
     @ResponseBody
     @Transactional(rollbackOn = Exception.class)
-    @RequestMapping(value = "/file/uploads/{caseId}/{type}")
+    @RequestMapping(value = "/uploads/{caseId}/{type}")
     public Object uploads(@RequestParam("files")MultipartFile[] files, @PathVariable() Long caseId, @PathVariable() Integer type) throws IOException {
+
         Case byId = caseService.findById(caseId);
         for (MultipartFile multipartFile:files){
             Doc doc = new Doc();
@@ -77,7 +79,7 @@ public class FileController {
     }
 
 
-    @RequestMapping("/file/download/{id}")
+    @RequestMapping("/download/{id}")
     public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Long id) throws IOException {
 
         Doc byId = docService.findById(id);

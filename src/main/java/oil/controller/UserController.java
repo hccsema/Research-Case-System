@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
  * @author waiter
  */
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -26,5 +29,9 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+    @PostMapping(value = "/add/{userName}")
+    public String addUser(){
+        return "";
+    }
 
 }

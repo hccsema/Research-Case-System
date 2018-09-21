@@ -3,6 +3,7 @@ package oil.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-18  上午10:43.
@@ -20,4 +21,6 @@ public class Type {
     private Boolean isExist;
     private Integer grade;
 
+    @OneToMany
+    private List<Case> cases;
 }
