@@ -57,7 +57,7 @@
                     <h3 class="panel-title">案例库简介</h3>
                 </div>
                 <div class="panel-body">
-                    <p></p>
+                    <p th:text="${#servletContext.getAttribute('lib').introduction}"></p>
                 </div>
             </div>
             <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
@@ -73,7 +73,9 @@
                     <h3 class="panel-title">标签</h3>
                 </div>
                 <div class="panel-body">
-                    <p></p>
+                    <a th:each="t:${#servletContext.getAttribute('tags')}">
+                        <a th:text="${t.name}+'('+${t.cases.size}+')'"></a>
+                    </a>
                 </div>
             </div>
             <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
