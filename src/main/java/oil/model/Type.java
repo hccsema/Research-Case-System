@@ -3,6 +3,7 @@ package oil.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,5 +23,5 @@ public class Type {
     private Integer grade;
 
     @OneToMany
-    private List<Case> cases;
+    private List<Case> cases=new ArrayList<>();
 }
