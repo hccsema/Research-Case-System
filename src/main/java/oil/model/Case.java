@@ -3,6 +3,7 @@ package oil.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Entity
 @Data
 @Table(name = "oil_case")
-public class Case {
+public class Case implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

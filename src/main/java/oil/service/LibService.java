@@ -19,13 +19,13 @@ public class LibService {
     @Autowired
     private LibDao libDao;
 
-    @Cacheable(value = "getLib")
+    @Cacheable(value = "LibService_getLib")
     public Lib getLib(){
         ArrayList<Lib> all = libDao.findAll();
         return all.size()>0?all.get(0):null;
     }
 
-    @CacheEvict(value = "getLib")
+    @CacheEvict(value = "LibService_getLib")
     public void save(Lib lib){
         libDao.save(lib);
     }

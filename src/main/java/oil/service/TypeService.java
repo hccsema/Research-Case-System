@@ -19,12 +19,12 @@ public class TypeService {
     @Autowired
     private TypeDao typeDao;
 
-    @Cacheable(value = "findAll")
+    @Cacheable(value = "TypeService_findAll")
     public ArrayList<Type> findAll(){
         return typeDao.findAllByIsExistOrderByGradeAsc(true);
     }
 
-    @CacheEvict(value = "findAll")
+    @CacheEvict(value = "TypeService_findAll")
     public void save(Type type){
         typeDao.save(type);
     }

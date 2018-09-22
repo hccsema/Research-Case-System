@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by  waiter on 18-9-18  上午11:05.
@@ -14,7 +15,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Doc {
+public class Doc implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -19,12 +19,12 @@ public class TagService {
     @Autowired
     private TagDao tagDao;
 
-    @Cacheable(value = "findAll")
+    @Cacheable(value = "TagService_findAll")
     public ArrayList<Tag> findAll(){
         return tagDao.findAllByIsExistOrderByCases(true);
     }
 
-    @CacheEvict(value = "findAll")
+    @CacheEvict(value = "TagService_findAll")
     public void save(Tag tag){
         tagDao.save(tag);
     }

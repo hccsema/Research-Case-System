@@ -17,12 +17,12 @@ public class DocService {
     @Autowired
     private DocDao docDao;
 
-    @CacheEvict(value = "findById")
+    @CacheEvict(value = "DocService_findById")
     public void save(Doc doc){
         docDao.save(doc);
     }
 
-    @Cacheable(value = "findById")
+    @Cacheable(value = "DocService_findById")
     public Doc findById(Long id){
         return docDao.getOne(id);
     }

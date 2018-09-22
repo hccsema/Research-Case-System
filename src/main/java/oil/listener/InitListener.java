@@ -39,12 +39,6 @@ public class InitListener implements ServletContextListener {
         //初始化 ApplicationContext  对象
         applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext());
 
-
-        initLib(sce);
-        initType(sce);
-        initTag(sce);
-        initCaseByDate(sce);
-
         service(sce);
     }
 

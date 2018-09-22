@@ -26,13 +26,13 @@ public class CaseService {
     @Autowired
     private CaseDao caseDao;
 
-    @Cacheable(value = "findAllByType")
+    @Cacheable(value = "CaseService_findAllByType")
     public Page<Case> findAllByType(int page, Type type){
         PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.desc("date")));
         return caseDao.findAllByType(date,type);
     }
 
-    @Cacheable(value = "findAllByTagsContaining")
+    @Cacheable(value = "CaseService_findAllByTagsContaining")
     public Page<Case> findAllByTagsContaining(int page , Tag tag){
         PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.desc("date")));
         return caseDao.findAllByTagsContaining(date,tag);

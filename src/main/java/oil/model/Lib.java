@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by  waiter on 18-9-18  上午10:51.
@@ -15,7 +16,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Lib{
+public class Lib implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
