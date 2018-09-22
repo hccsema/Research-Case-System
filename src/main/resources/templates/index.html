@@ -11,33 +11,8 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-</head>
 <body>
-    <div>
-        <div style="width: 5%;float: left">
-            <img th:src="@{/images/logo.jpg}" width="60px" style="margin-top: 17px"/>
-        </div>
-        <div style="width: 55%;float: left;margin-top: 15px">
-            <h5 style="line-height: 0.5px"><b th:text="${#servletContext.getAttribute('lib').subtitle}">石油与天然气工程专业学位课程——采油采气工程设计与应用</b></h5>
-            <h3><b th:text="${#servletContext.getAttribute('lib').mainTitle}"></b></h3>
-        </div>
-        <div style="width: 40%;float: left">
-            <div class="input-group" style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 28px">
-                <input type="text" class="form-control"placeholder="请输入文档名"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div style="padding-top: 100px">
-        <ul class="nav nav-pills" style="background: #337AB7;">
-            <li class="active"><a href="#" style="color: white">网站首页</a></li>
-            <li class="active" th:each="m:${#servletContext.getAttribute('types')}" >
-                <a th:text="${m.name}" href="#" style="color: white"></a>
-            </li>
-        </ul>
-    </div>
+    <div th:replace="/common/top::top"></div>
     <div>
         <div style="width: 76%;height: auto;float: left;margin: 0.5%">
             <div th:each="m:${#servletContext.getAttribute('types')}">
@@ -57,50 +32,7 @@
                 </div>
             </div>
         </div>
-        <div style="width: 22%;height: auto;float: left;margin: 0.5%;">
-            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
-                <div class="panel-heading">
-                    <h3 class="panel-title">案例库简介</h3>
-                </div>
-                <div class="panel-body">
-                    <p th:text="${#servletContext.getAttribute('lib').introduction}"></p>
-                </div>
-            </div>
-            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
-                <div class="panel-heading">
-                    <h3 class="panel-title">案例库统计</h3>
-                </div>
-                <div class="panel-body">
-                    <span th:each="t:${#servletContext.getAttribute('types')}">
-                        <a href="#" th:text="${t.name}+' ['+${t.cases.size()}+']'"></a><br/>
-                    </span>
-                </div>
-            </div>
-            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
-                <div class="panel-heading">
-                    <h3 class="panel-title">标签</h3>
-                </div>
-                <div class="panel-body">
-                    <span th:each="t:${#servletContext.getAttribute('tags')}">
-                        <h4>
-                            <span class="label label-primary">
-                                <a th:text="${t.name}+'('+${t.cases.size()}+')'" href="#" style="color: white"></a>
-                            </span>
-                        </h4>
-                    </span>
-                </div>
-            </div>
-            <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
-                <div class="panel-heading">
-                    <h3 class="panel-title">日期归档</h3>
-                </div>
-                <div class="panel-body">
-                    <span th:each="count:${#servletContext.getAttribute('countByDate')}">
-                        <span th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></span><br/>
-                    </span>
-                </div>
-            </div>
-        </div>
+        <div th:replace="/common/right::right"></div>
     </div>
 </body>
 </html>
