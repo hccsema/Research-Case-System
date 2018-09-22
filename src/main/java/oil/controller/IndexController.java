@@ -19,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-19  下午7:14.
@@ -57,9 +58,18 @@ public class IndexController {
         }
 
         for (Tag tag:search1){
-            ArrayList<Case> allByTagsContaining = caseService.findAllByTagsContaining(tag);
+            List<Case> cases = tag.getCases();
+            for (Case c:cases){
+                longCaseHashMap.put(c.getId(),c);
+            }
         }
 
+        for (Doc doc:search3){
+            Case aCase = doc.getACase();
+            longCaseHashMap.put(aCase.getId(),aCase);
+        }
+
+        model.addAttribute("cases",longCaseHashMap);
         return "";
     }
 
