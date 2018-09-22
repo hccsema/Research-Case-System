@@ -1,0 +1,53 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+</head>
+<body>
+    <div style="width: 22%;height: auto;float: left;margin: 0.5%;" th:fragment="right">
+        <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+            <div class="panel-heading">
+                <h3 class="panel-title">案例库简介</h3>
+            </div>
+            <div class="panel-body">
+                <p th:text="${#servletContext.getAttribute('lib').introduction}"></p>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+            <div class="panel-heading">
+                <h3 class="panel-title">案例库统计</h3>
+            </div>
+            <div class="panel-body">
+                        <span th:each="t:${#servletContext.getAttribute('types')}">
+                            <a href="#" th:text="${t.name}+' ['+${t.cases.size()}+']'"></a><br/>
+                        </span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+            <div class="panel-heading">
+                <h3 class="panel-title">标签</h3>
+            </div>
+            <div class="panel-body">
+                        <span th:each="t:${#servletContext.getAttribute('tags')}">
+                            <h4>
+                                <span class="label label-primary">
+                                    <a th:text="${t.name}+'('+${t.cases.size()}+')'" href="#" style="color: white"></a>
+                                </span>
+                            </h4>
+                        </span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
+            <div class="panel-heading">
+                <h3 class="panel-title">日期归档</h3>
+            </div>
+            <div class="panel-body">
+                        <span th:each="count:${#servletContext.getAttribute('countByDate')}">
+                            <span th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></span><br/>
+                        </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
