@@ -39,19 +39,25 @@
         </ul>
     </div>
     <div>
-        <div style="width: 68%;height: auto;float: left;margin: 0.5%">
+        <div style="width: 76%;height: auto;float: left;margin: 0.5%">
             <div th:each="m:${#servletContext.getAttribute('types')}">
-                <div class="panel panel-default" style="margin: 0.5%;float: left;width: 49%">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" th:text="${m.name}"></h3>
+                <div class="panel panel-default" style="margin: 0.5%;float: left;width: 49%;height: 300px">
+                    <div class="panel-heading" style="height: 37.6px">
+                        <div style="width: 90%;float: left">
+                            <h3 class="panel-title" th:text="${m.name}"></h3>
+                        </div>
+                        <div style="width: 10%;float: left">
+                            <a href="#">更多>></a>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <p></p>
+                    <div class="panel-body" th:each="c,cStat:${m.cases}" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
+                        <p th:if="${cStat.index<8}" th:text="${c.name}" style="float: left"></p>
+                        <p th:if="${cStat.index<8}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right"></p>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="width: 30%;height: auto;float: left;margin: 0.5%;">
+        <div style="width: 22%;height: auto;float: left;margin: 0.5%;">
             <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
                 <div class="panel-heading">
                     <h3 class="panel-title">案例库简介</h3>
@@ -65,7 +71,9 @@
                     <h3 class="panel-title">案例库统计</h3>
                 </div>
                 <div class="panel-body">
-                    <p></p>
+                    <span th:each="t:${#servletContext.getAttribute('types')}">
+                        <span th:text="${t.name}+' ['+${t.cases.size()}+']'"></span><br/>
+                    </span>
                 </div>
             </div>
             <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
@@ -73,9 +81,13 @@
                     <h3 class="panel-title">标签</h3>
                 </div>
                 <div class="panel-body">
-                    <a th:each="t:${#servletContext.getAttribute('tags')}">
-                        <a th:text="${t.name}+'('+${t.cases.size}+')'"></a>
-                    </a>
+                    <span th:each="t:${#servletContext.getAttribute('tags')}">
+                        <h4>
+                            <span class="label label-primary">
+                                <a th:text="${t.name}+'('+${t.cases.size()}+')'" href="#" style="color: white"></a>
+                            </span>
+                        </h4>
+                    </span>
                 </div>
             </div>
             <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%">
