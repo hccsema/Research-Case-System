@@ -71,7 +71,7 @@ public class CaseController {
      */
     @GetMapping(value = {"/{tag}/{page}/tag.html","/{tag}/tag.html"})
     public String getCasesByTag(@PathVariable(name = "tag") Tag tag,
-                                @PathVariable(name = "page") Integer page,
+                                @PathVariable(name = "page",required = false) Integer page,
                                 Model model){
         if (page==null){
             page=1;
@@ -93,7 +93,7 @@ public class CaseController {
      */
     @GetMapping(value = {"/{type}/{page}/type.html","/{type}/type.html"})
     public String getCasesByType(@PathVariable(name = "type") Type type,
-                                @PathVariable(name = "page") Integer page,
+                                @PathVariable(name = "page",required = false) Integer page,
                                 Model model){
         if (page==null){
             page=1;

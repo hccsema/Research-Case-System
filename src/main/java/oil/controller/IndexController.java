@@ -2,9 +2,15 @@ package oil.controller;
 
 import oil.listener.InitListener;
 import oil.model.Lib;
+import oil.service.CaseService;
+import oil.service.DocService;
 import oil.service.LibService;
+import oil.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -17,6 +23,12 @@ import org.springframework.web.context.WebApplicationContext;
 public class IndexController {
     @Autowired
     private LibService libService;
+    @Autowired
+    private TagService tagService;
+    @Autowired
+    private CaseService caseService;
+    @Autowired
+    private DocService docService;
 
     @RequestMapping(value = {"/","/index"})
     public String index(){
@@ -26,4 +38,12 @@ public class IndexController {
         libService.save(lib);
         return "index";
     }
+
+    @GetMapping(value = "/search/{search}")
+    public String search(@PathVariable(name = "search",required = false) String search,
+                         Model model){
+
+        return "";
+    }
+
 }

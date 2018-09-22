@@ -24,6 +24,10 @@ public class TagService {
         return tagDao.findAllByIsExistOrderByCases(true);
     }
 
+    public ArrayList<Tag> search(String search){
+        return tagDao.findAllByIsExistAndNameContaining(true,search);
+    }
+
     @CacheEvict(value = "TagService_findAll")
     public void save(Tag tag){
         tagDao.save(tag);

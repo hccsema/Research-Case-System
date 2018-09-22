@@ -2,10 +2,7 @@ package oil.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,4 +21,6 @@ public class Doc implements Serializable {
     private String path;
     private Date uploadDate;
     private Long downCount;
+    @ManyToOne
+    private Case aCase;
 }
