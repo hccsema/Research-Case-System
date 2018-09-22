@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="panel-body" th:each="c,cStat:${m.cases}" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
-                        <p th:if="${cStat.index<8}" th:text="${c.name}" style="float: left"></p>
+                        <a href="#" th:if="${cStat.index<8}" th:text="${c.name}" style="float: left;color: black"></a>
                         <p th:if="${cStat.index<8}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right"></p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="panel-body">
                     <span th:each="t:${#servletContext.getAttribute('types')}">
-                        <span th:text="${t.name}+' ['+${t.cases.size()}+']'"></span><br/>
+                        <a href="#" th:text="${t.name}+' ['+${t.cases.size()}+']'"></a><br/>
                     </span>
                 </div>
             </div>
@@ -95,7 +95,9 @@
                     <h3 class="panel-title">日期归档</h3>
                 </div>
                 <div class="panel-body">
-                    <p></p>
+                    <span th:each="count:${#servletContext.getAttribute('countByDate')}">
+                        <span th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></span><br/>
+                    </span>
                 </div>
             </div>
         </div>
