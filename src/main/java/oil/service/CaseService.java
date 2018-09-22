@@ -37,9 +37,17 @@ public class CaseService {
     @Cacheable(value = "CaseService_findAllByTagsContaining")
     public Page<Case> findAllByTagsContaining(int page , Tag tag){
         PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
-        return caseDao.findAllByTagsContainingAndAndIsExist(date,tag,true);
+        return caseDao.findAllByTagsContainingAndIsExist(date,tag,true);
     }
 
+    @Cacheable(value = "CaseService_findAllByTagsContaining")
+    public ArrayList<Case> findAllByTagsContaining( Tag tag){
+        return caseDao.findAllByTagsContainingAndIsExist(tag,true);
+    }
+
+    public ArrayList<Case> search(String search){
+        return caseDao.search(search);
+    }
 
     @Cacheable(value = "CaseService_findById")
     public Case findById(Long id){

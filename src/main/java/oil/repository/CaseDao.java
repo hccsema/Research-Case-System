@@ -38,7 +38,9 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * @param tag
      * @return
      */
-    Page<Case> findAllByTagsContainingAndAndIsExist(Pageable pageable, Tag tag,Boolean b );
+    Page<Case> findAllByTagsContainingAndIsExist(Pageable pageable, Tag tag,Boolean b );
+
+    ArrayList<Case> findAllByTagsContainingAndIsExist( Tag tag,Boolean b );
 
     /**
      * 通过id查找
@@ -65,6 +67,11 @@ public interface CaseDao extends JpaRepository<Case,Long> {
             nativeQuery = true)
     Page<Case> findByDate(Date date,Pageable pageable);
 
-    @Query()
+    @Query(value = "SELECT c FROM Case c where " +
+            "c.name like %?1% or " +
+            "c.introduction like %?1% or "+
+            "c.author like %?1% or " +
+            "c.direction like %?1% or " +
+            "c.summary like %?1%")
     ArrayList<Case> search(String search);
 }

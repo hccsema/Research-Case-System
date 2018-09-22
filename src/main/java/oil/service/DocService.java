@@ -7,6 +7,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 /**
  * Created by  waiter on 18-9-20  下午2:40.
  *
@@ -21,6 +23,11 @@ public class DocService {
     public void save(Doc doc){
         docDao.save(doc);
     }
+
+    public ArrayList<Doc> search(String search){
+        return docDao.findAllByNameContainingOrPathContaining(search,search);
+    }
+
 
     @Cacheable(value = "DocService_findById")
     public Doc findById(Long id){

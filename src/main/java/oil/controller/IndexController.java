@@ -1,7 +1,10 @@
 package oil.controller;
 
 import oil.listener.InitListener;
+import oil.model.Case;
+import oil.model.Doc;
 import oil.model.Lib;
+import oil.model.Tag;
 import oil.service.CaseService;
 import oil.service.DocService;
 import oil.service.LibService;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by  waiter on 18-9-19  下午7:14.
@@ -42,6 +48,17 @@ public class IndexController {
     @GetMapping(value = "/search/{search}")
     public String search(@PathVariable(name = "search",required = false) String search,
                          Model model){
+        ArrayList<Tag> search1 = tagService.search(search);
+        ArrayList<Case> search2 = caseService.search(search);
+        ArrayList<Doc> search3 = docService.search(search);
+        HashMap<Long, Case> longCaseHashMap = new HashMap<>();
+        for (Case c:search2){
+            longCaseHashMap.put(c.getId(),c);
+        }
+
+        for (Tag tag:search1){
+            ArrayList<Case> allByTagsContaining = caseService.findAllByTagsContaining(tag);
+        }
 
         return "";
     }
