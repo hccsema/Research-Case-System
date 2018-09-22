@@ -16,6 +16,8 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
-
+    public String add(){
+        return "";
+    }
 
 }

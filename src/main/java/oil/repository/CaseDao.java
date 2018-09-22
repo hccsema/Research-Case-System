@@ -3,12 +3,16 @@ package oil.repository;
 import oil.model.Case;
 import oil.model.Tag;
 import oil.model.Type;
+import oil.repository.result.DayAndCount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by  waiter on 18-9-19  下午12:18.
@@ -45,4 +49,7 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * @return
      */
     Case findFirstById(Long id);
+
+    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m-%d') days,COUNT(*) as count FROM oil.oil_case GROUP BY days;" ,nativeQuery = true)
+    Collection<DayAndCount> getCountByDate();
 }

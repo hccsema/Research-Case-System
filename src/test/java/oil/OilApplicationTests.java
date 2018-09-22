@@ -3,6 +3,8 @@ package oil;
 import oil.model.Doc;
 import oil.model.Role;
 import oil.model.User;
+import oil.repository.CaseDao;
+import oil.repository.result.DayAndCount;
 import oil.service.CaseService;
 import oil.service.DocService;
 import oil.service.UserDetailsServiceImpl;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +31,8 @@ public class OilApplicationTests {
     private DocService docService;
     @Autowired
     private CaseService caseService;
+    @Autowired
+    private CaseDao caseDao;
 
     @Test
     @Transactional(rollbackFor = Exception.class)
@@ -46,10 +51,7 @@ public class OilApplicationTests {
 
     @Test
     public void T1(){
-        Doc doc = new Doc();
-        doc.setName("001");
-        doc.setPath("ssasss");
-        docService.save(doc);
+
     }
 
 }

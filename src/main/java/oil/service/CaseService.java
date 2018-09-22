@@ -4,6 +4,7 @@ import oil.model.Case;
 import oil.model.Tag;
 import oil.model.Type;
 import oil.repository.CaseDao;
+import oil.repository.result.DayAndCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 
 
 /**
@@ -42,9 +44,16 @@ public class CaseService {
         return caseDao.findFirstById(id);
     }
 
+    @Cacheable(value = "getCountByDate")
+    public Collection<DayAndCount> getCountByDate(){
+        return caseDao.getCountByDate();
+    }
+
+
     @CacheEvict(value = {"findAllByType",
                         "findById",
-                        "findAllByTagsContaining"})
+                        "findAllByTagsContaining",
+                        "getCountByDate"})
     public void save(Case cases){
         caseDao.save(cases);
     }

@@ -21,7 +21,7 @@ public class Type {
     private String name;
     private Boolean isExist;
     private Integer grade;
-    @OrderBy("date")
+    @OrderBy("date asc ")
     @OneToMany
     private List<Case> cases=new ArrayList<>();
 }

@@ -58,8 +58,8 @@ doc:
 
 
 logging:
-  file: water.log
-  path: /home/waiter/logs
+  #file: water.log
+  #path: /home/waiter/logs
   level:
     org: warn
     org.springframework: warn

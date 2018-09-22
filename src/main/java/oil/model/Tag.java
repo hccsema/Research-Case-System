@@ -19,7 +19,7 @@ public class Tag {
     private Integer id;
     private String name;
     private Boolean isExist;
-    @OrderBy("date")
+    @OrderBy("date asc ")
     @ManyToMany
     private List<Case> cases = new ArrayList<>();
 }

@@ -4,6 +4,8 @@ package oil.listener;
 import oil.model.Lib;
 import oil.model.Tag;
 import oil.model.Type;
+import oil.repository.result.DayAndCount;
+import oil.service.CaseService;
 import oil.service.LibService;
 import oil.service.TagService;
 import oil.service.TypeService;
@@ -14,6 +16,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +43,7 @@ public class InitListener implements ServletContextListener {
         initLib(sce);
         initType(sce);
         initTag(sce);
+        initCaseByDate(sce);
 
         service(sce);
     }
@@ -90,6 +94,12 @@ public class InitListener implements ServletContextListener {
         sce.getServletContext().setAttribute("tags",all);
     }
 
+    private void initCaseByDate(ServletContextEvent sce){
+        CaseService bean = applicationContext.getBean(CaseService.class);
+        Collection<DayAndCount> countByDate = bean.getCountByDate();
+        sce.getServletContext().setAttribute("countByDate",countByDate);
+    }
+
     private void service(ServletContextEvent sce){
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         // 参数：1、任务体 2、首次执行的延时时间
@@ -98,6 +108,7 @@ public class InitListener implements ServletContextListener {
             initLib(sce);
             initTag(sce);
             initType(sce);
+            initCaseByDate(sce);
         }, 0, 10, TimeUnit.MINUTES);
 
 
