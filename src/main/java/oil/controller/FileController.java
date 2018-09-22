@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,6 +59,7 @@ public class FileController {
             Doc doc = new Doc();
             doc.setPath("/"+byId.getType().getName()+"/"+byId.getName()+"/"+multipartFile.getOriginalFilename());
             doc.setName(multipartFile.getOriginalFilename());
+            doc.setUploadDate(new Date());
             doc.setDownCount(0L);
             File file = new File(basePath+doc.getPath());
             /**

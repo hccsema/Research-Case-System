@@ -23,14 +23,14 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * @param type
      * @return
      */
-    Page<Case> findAllByType(Pageable pageable, Type type);
+    Page<Case> findAllByTypeAndIsExist(Pageable pageable, Type type,Boolean b);
 
     /**
      * 通过类别查找前8个
      * @param type
      * @return
      */
-    ArrayList<Case> findTop8ByType(Type type);
+    ArrayList<Case> findTop8ByTypeAndIsExist(Type type,Boolean b);
 
     /**
      * 通过标签查找
@@ -38,7 +38,7 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * @param tag
      * @return
      */
-    Page<Case> findAllByTagsContaining(Pageable pageable, Tag tag);
+    Page<Case> findAllByTagsContainingAndAndIsExist(Pageable pageable, Tag tag,Boolean b );
 
     /**
      * 通过id查找
@@ -51,9 +51,9 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * 根据日期归档统计
      * @return
      */
-    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case GROUP BY days;" ,nativeQuery = true)
+    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case where `is_exist`=true GROUP BY days;" ,nativeQuery = true)
     Collection<DayAndCount> getCountByDate();
 
-    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m')",nativeQuery = true)
+    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true ",nativeQuery = true)
     ArrayList<Case> findByDate(Date date);
 }

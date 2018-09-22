@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by  waiter on 18-9-18  上午11:05.
@@ -21,5 +22,6 @@ public class Doc implements Serializable {
     private Long id;
     private String name;
     private String path;
+    private Date uploadDate;
     private Long downCount;
 }
