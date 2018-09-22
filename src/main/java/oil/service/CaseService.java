@@ -13,7 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 
 /**
@@ -28,32 +30,38 @@ public class CaseService {
 
     @Cacheable(value = "CaseService_findAllByType")
     public Page<Case> findAllByType(int page, Type type){
-        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.desc("date")));
+        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
         return caseDao.findAllByTypeAndIsExist(date,type,true);
     }
 
     @Cacheable(value = "CaseService_findAllByTagsContaining")
     public Page<Case> findAllByTagsContaining(int page , Tag tag){
-        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.desc("date")));
+        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
         return caseDao.findAllByTagsContainingAndAndIsExist(date,tag,true);
     }
 
 
-    @Cacheable(value = "findById")
+    @Cacheable(value = "CaseService_findById")
     public Case findById(Long id){
         return caseDao.findFirstById(id);
     }
 
-    @Cacheable(value = "getCountByDate")
+    @Cacheable(value = "CaseService_getCountByDate")
     public Collection<DayAndCount> getCountByDate(){
         return caseDao.getCountByDate();
     }
 
+    @Cacheable(value = "CaseService_getCasesByDate")
+    public Page<Case> getCasesByDate(Date date,Integer page){
+        PageRequest request = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
+        return caseDao.findByDate(date,request);
+    }
 
-    @CacheEvict(value = {"findAllByType",
-                        "findById",
-                        "findAllByTagsContaining",
-                        "getCountByDate"})
+    @CacheEvict(value = {"CaseService_findAllByType",
+                        "CaseService_findById",
+                        "CaseService_findAllByTagsContaining",
+                        "CaseService_getCountByDate",
+                        "CaseService_getCasesByDate"})
     public void save(Case cases){
         caseDao.save(cases);
     }

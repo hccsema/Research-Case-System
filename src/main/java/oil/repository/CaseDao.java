@@ -51,9 +51,17 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * 根据日期归档统计
      * @return
      */
-    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case where `is_exist`=true GROUP BY days;" ,nativeQuery = true)
+    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case where `is_exist`=true GROUP BY days" ,nativeQuery = true)
     Collection<DayAndCount> getCountByDate();
 
-    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true ",nativeQuery = true)
-    ArrayList<Case> findByDate(Date date);
+    /**
+     * 根据月分页查询
+     * @param date
+     * @param pageable
+     * @return
+     */
+    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true  /* #pageable# */",
+            countQuery = "SELECT count(*) FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true",
+            nativeQuery = true)
+    Page<Case> findByDate(Date date,Pageable pageable);
 }

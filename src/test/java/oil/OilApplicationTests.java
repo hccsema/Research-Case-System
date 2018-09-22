@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,8 +56,9 @@ public class OilApplicationTests {
         Calendar calendar = Calendar.getInstance(Locale.CHINA);
         calendar.set(2018,8,23);
         Date time = calendar.getTime();
-        ArrayList<Case> byDate = caseDao.findByDate(time);
-        for (Case c:byDate){
+        PageRequest request = PageRequest.of(1,20);
+        Page<Case> byDate = caseDao.findByDate(time,request);
+        for (Case c:byDate.getContent()){
             System.out.println(c);
         }
     }
