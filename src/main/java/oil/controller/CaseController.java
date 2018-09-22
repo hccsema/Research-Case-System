@@ -58,7 +58,7 @@ public class CaseController {
         Page<Case> casesByDate = caseService.getCasesByDate(simpleDateFormat.parse(date), page);
         model.addAttribute("cases",casesByDate);
 
-        return "";
+        return "front/more";
     }
 
 
@@ -81,7 +81,7 @@ public class CaseController {
         model.addAttribute("cases",allByTagsContaining);
 
 
-        return "";
+        return "front/more";
     }
 
     /**
@@ -103,7 +103,7 @@ public class CaseController {
         model.addAttribute("cases",allByType);
 
 
-        return "";
+        return "front/more";
     }
 
 }
