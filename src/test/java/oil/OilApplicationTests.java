@@ -1,5 +1,6 @@
 package oil;
 
+import oil.model.Case;
 import oil.model.Doc;
 import oil.model.Role;
 import oil.model.User;
@@ -16,8 +17,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -51,7 +51,13 @@ public class OilApplicationTests {
 
     @Test
     public void T1(){
-
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        calendar.set(2018,8,23);
+        Date time = calendar.getTime();
+        ArrayList<Case> byDate = caseDao.findByDate(time);
+        for (Case c:byDate){
+            System.out.println(c);
+        }
     }
 
 }

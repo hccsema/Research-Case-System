@@ -9,10 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by  waiter on 18-9-19  下午12:18.
@@ -54,6 +51,9 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * 根据日期归档统计
      * @return
      */
-    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m-%d') days,COUNT(*) as count FROM oil.oil_case GROUP BY days;" ,nativeQuery = true)
+    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case GROUP BY days;" ,nativeQuery = true)
     Collection<DayAndCount> getCountByDate();
+
+    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m-%d')=DATE_FORMAT(?1,'%Y-%m-%d')",nativeQuery = true)
+    ArrayList<Case> findByDate(Date date);
 }

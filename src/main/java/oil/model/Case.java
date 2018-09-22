@@ -42,4 +42,27 @@ public class Case {
     private List<Doc> contents=new ArrayList<>();
     @OneToMany
     private List<Doc> solves=new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Case{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", type=" + type.getName() +
+                ", isExist=" + isExist +
+                ", date=" + date +
+                ", times=" + times +
+                ", libId='" + libId + '\'' +
+                ", field='" + field + '\'' +
+                ", direction='" + direction + '\'' +
+                ", course='" + course + '\'' +
+                ", author='" + author + '\'' +
+                ", unit='" + unit + '\'' +
+                ", tags=" + tags +
+                ", summary='" + summary + '\'' +
+                ", contents=" + contents +
+                ", solves=" + solves +
+                '}';
+    }
 }
