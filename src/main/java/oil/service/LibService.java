@@ -3,6 +3,8 @@ package oil.service;
 import oil.model.Lib;
 import oil.repository.LibDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ public class LibService {
     @Autowired
     private LibDao libDao;
 
+    @Cacheable(value = "getLib")
     public Lib getLib(){
         ArrayList<Lib> all = libDao.findAll();
         return all.size()>0?all.get(0):null;
     }
 
+    @CacheEvict(value = "getLib")
     public void save(Lib lib){
         libDao.save(lib);
     }

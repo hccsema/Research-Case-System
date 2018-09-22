@@ -3,6 +3,8 @@ package oil.service;
 import oil.model.Type;
 import oil.repository.TypeDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +19,13 @@ public class TypeService {
     @Autowired
     private TypeDao typeDao;
 
+    @Cacheable(value = "findAll")
     public ArrayList<Type> findAll(){
         return typeDao.findAllByIsExistOrderByGradeAsc(true);
+    }
+
+    @CacheEvict(value = "findAll")
+    public void save(Type type){
+        typeDao.save(type);
     }
 }
