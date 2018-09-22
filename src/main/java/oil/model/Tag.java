@@ -20,6 +20,6 @@ public class Tag {
     private String name;
     private Boolean isExist;
     @OrderBy("date asc ")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Case> cases = new ArrayList<>();
 }

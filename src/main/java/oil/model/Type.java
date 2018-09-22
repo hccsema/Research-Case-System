@@ -22,6 +22,6 @@ public class Type {
     private Boolean isExist;
     private Integer grade;
     @OrderBy("date asc ")
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Case> cases=new ArrayList<>();
 }
