@@ -1,5 +1,6 @@
 package oil.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Case implements Serializable {
     private String name;
     @Column(length = 500)
     private String introduction;
+    @JsonIgnore
     @ManyToOne
     private Type type;
     private Boolean isExist;
@@ -39,8 +41,10 @@ public class Case implements Serializable {
     private List<Tag> tags=new ArrayList<>();
     @Column(length = 500)
     private String summary;
+    @JsonIgnore
     @OneToMany
     private List<Doc> contents=new ArrayList<>();
+    @JsonIgnore
     @OneToMany
     private List<Doc> solves=new ArrayList<>();
 
