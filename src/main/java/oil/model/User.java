@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,10 @@ public class User implements UserDetails , Serializable {
     private String userName;
     private String passWord;
     private String email;
+    private Date lastLoginDate;
+    private Date thisLoginDate;
+    private String lastLoginIp;
+    private String thisLoginIp;
 
     /**
      * 是否过期false为已过期
