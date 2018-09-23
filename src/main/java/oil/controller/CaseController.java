@@ -38,7 +38,7 @@ public class CaseController {
         c.setTimes(c.getTimes()+1);
         caseService.save(c);
         model.addAttribute("case",c);
-        return "";
+        return "front/case";
     }
 
     /**

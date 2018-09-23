@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
@@ -46,8 +47,9 @@ public class IndexController {
         return "index";
     }
 
+    @ResponseBody
     @GetMapping(value = "/search/{search}")
-    public String search(@PathVariable(name = "search",required = false) String search,
+    public Object search(@PathVariable(name = "search",required = false) String search,
                          Model model){
         ArrayList<Tag> search1 = tagService.search(search);
         ArrayList<Case> search2 = caseService.search(search);
@@ -70,7 +72,7 @@ public class IndexController {
         }
 
         model.addAttribute("cases",longCaseHashMap.values());
-        return "";
+        return longCaseHashMap;
     }
 
 }
