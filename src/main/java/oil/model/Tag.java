@@ -20,7 +20,7 @@ public class Tag implements Serializable {
     private Integer id;
     private String name;
     private Boolean isExist;
-    @OrderBy("date asc ")
+    @OrderBy("date desc ")
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Case> cases = new ArrayList<>();
 }

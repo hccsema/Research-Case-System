@@ -25,7 +25,7 @@ public class Type implements Serializable {
      * 优先级
      */
     private Integer grade;
-    @OrderBy("date asc ")
+    @OrderBy("date desc ")
     @OneToMany(fetch = FetchType.EAGER)
     private List<Case> cases=new ArrayList<>();
 }

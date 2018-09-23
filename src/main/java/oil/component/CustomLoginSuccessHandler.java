@@ -38,7 +38,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         RequestCache requestCache = new HttpSessionRequestCache();
 
@@ -60,7 +61,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     }
 
     private void saveLoginInfo(HttpServletRequest request, Authentication authentication) {
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails user = (UserDetails) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
         User byUserName = userDetailsService.findByUserName(user.getUsername());
         String ip = request.getRemoteAddr();
         byUserName.setLastLoginDate(byUserName.getThisLoginDate());
