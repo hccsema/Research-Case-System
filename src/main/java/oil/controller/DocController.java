@@ -12,10 +12,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -47,7 +47,7 @@ public class DocController {
      * @throws IOException
      */
     @ResponseBody
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @RequestMapping(value = "/uploads/{caseId}/{type}")
     public Object uploads(@RequestParam("files")MultipartFile[] files, @PathVariable() Case caseId, @PathVariable() Integer type) throws IOException {
         Assert.notEmpty(files,"没有要上传的文件");
@@ -79,6 +79,7 @@ public class DocController {
     }
 
 
+    @Transactional(rollbackFor = Exception.class)
     @RequestMapping("/download/{id}")
     public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Doc doc) throws IOException {
 

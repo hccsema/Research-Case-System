@@ -7,6 +7,7 @@ import oil.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/add")
     public String addUser(User user, Model model){
         User byUserName = userDetailsService.findByUserName(user.getUsername());
