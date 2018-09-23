@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,7 +72,8 @@ public class CaseService {
                         "CaseService_findById",
                         "CaseService_findAllByTagsContaining",
                         "CaseService_getCountByDate",
-                        "CaseService_getCasesByDate"})
+                        "CaseService_getCasesByDate",
+                        "CaseService_findTop10ByTypeAndIsExistOrderByTimes"})
     public void save(Case cases){
         caseDao.save(cases);
     }
@@ -80,7 +82,8 @@ public class CaseService {
                         "CaseService_findById",
                         "CaseService_findAllByTagsContaining",
                         "CaseService_getCountByDate",
-                        "CaseService_getCasesByDate"})
+                        "CaseService_getCasesByDate",
+                        "CaseService_findTop10ByTypeAndIsExistOrderByTimes"})
     public void delete(Case c){
         caseDao.delete(c);
     }
@@ -88,6 +91,11 @@ public class CaseService {
     @CacheEvict(value = "CaseService_findById")
     public void changTimes(Case cases){
         caseDao.save(cases);
+    }
+
+    @Cacheable(value = "CaseService_findTop10ByTypeAndIsExistOrderByTimes")
+    public Page<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type){
+        return caseDao.findTop10ByTypeAndIsExistOrderByTimes(type,true);
     }
 
 }

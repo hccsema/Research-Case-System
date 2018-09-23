@@ -36,8 +36,10 @@ public class CaseController {
     @GetMapping(value = "/{id}/case_info.html")
     public String getCaseById(@PathVariable(name = "id")Case c, Model model){
         c.setTimes(c.getTimes()+1);
-        caseService.save(c);
+        caseService.changTimes(c);
+        Page<Case> top10ByTypeAndIsExistOrderByTimes = caseService.findTop10ByTypeAndIsExistOrderByTimes(c.getType());
         model.addAttribute("case",c);
+        model.addAttribute("top",top10ByTypeAndIsExistOrderByTimes);
         return "front/case";
     }
 
