@@ -48,9 +48,9 @@ public class UserController {
             model.addAttribute("msg","用户已存在");
         }else {
             user.setPassWord(bCryptPasswordEncoder.encode(user.getUsername()));
-            Role role_user = roleService.getRole("ROLE_USER");
+            Role roleUser = roleService.getRole("ROLE_USER");
             LinkedList<Role> objects = new LinkedList<>();
-            objects.add(role_user);
+            objects.add(roleUser);
             user.setAuthorities(objects);
             user.setNonLocked(true);
             user.setNonExpired(true);

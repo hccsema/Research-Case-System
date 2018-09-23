@@ -96,7 +96,7 @@ public class CaseService {
 
     @Cacheable(value = "CaseService_findTop10ByTypeAndIsExistOrderByTimes")
     public List<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type){
-        return caseDao.findTop10ByTypeAndIsExistOrderByTimes(type,true);
+        return caseDao.findTop10ByTypeAndIsExistOrderByTimesDesc(type,true);
     }
 
 }
