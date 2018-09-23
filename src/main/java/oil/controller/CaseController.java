@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-22  下午6:01.
@@ -37,7 +38,7 @@ public class CaseController {
     public String getCaseById(@PathVariable(name = "id")Case c, Model model){
         c.setTimes(c.getTimes()+1);
         caseService.changTimes(c);
-        Page<Case> top10ByTypeAndIsExistOrderByTimes = caseService.findTop10ByTypeAndIsExistOrderByTimes(c.getType());
+        List<Case> top10ByTypeAndIsExistOrderByTimes = caseService.findTop10ByTypeAndIsExistOrderByTimes(c.getType());
         model.addAttribute("case",c);
         model.addAttribute("top",top10ByTypeAndIsExistOrderByTimes);
         return "front/case";
