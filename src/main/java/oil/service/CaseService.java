@@ -32,13 +32,13 @@ public class CaseService {
 
     @Cacheable(value = "CaseService_findAllByType")
     public Page<Case> findAllByType(int page, Type type){
-        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
+        PageRequest date = PageRequest.of(page, 5, Sort.by(Sort.Order.asc("date")));
         return caseDao.findAllByTypeAndIsExist(date,type,true);
     }
 
     @Cacheable(value = "CaseService_findAllByTagsContaining")
     public Page<Case> findAllByTagsContaining(int page , Tag tag){
-        PageRequest date = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
+        PageRequest date = PageRequest.of(page, 5, Sort.by(Sort.Order.asc("date")));
         return caseDao.findAllByTagsContainingAndIsExist(date,tag,true);
     }
 
@@ -63,7 +63,7 @@ public class CaseService {
 
     @Cacheable(value = "CaseService_getCasesByDate")
     public Page<Case> getCasesByDate(Date date,Integer page){
-        PageRequest request = PageRequest.of(page, 20, Sort.by(Sort.Order.asc("date")));
+        PageRequest request = PageRequest.of(page, 5, Sort.by(Sort.Order.asc("date")));
         return caseDao.findByDate(date,request);
     }
 
