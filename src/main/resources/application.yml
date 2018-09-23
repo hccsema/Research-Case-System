@@ -52,6 +52,20 @@ spring:
       max-request-size: 1024Mb
       max-file-size: 500Mb
       enabled: true
+  mail:
+    port: 587
+    username: 1403976416@qq.com
+    password: torkcvokxfuugfaf
+    protocol: smtp
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    properties:
+    - name: mail.smtp.socketFactory.class
+      value: javax.net.ssl.SSLSocketFactory
+    - name: mail.smtp.ssl.enable
+      value: true
+    - name: mail.smtp.ssl.socketFactory
+      value: sf
 
 doc:
   path: /home/waiter/logs
