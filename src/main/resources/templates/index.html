@@ -18,10 +18,10 @@
             <div th:each="m:${#servletContext.getAttribute('types')}">
                 <div class="panel panel-default" style="margin: 0.5%;float: left;width: 49%;height: 300px">
                     <div class="panel-heading" style="height: 37.6px">
-                        <div style="width: 90%;float: left">
+                        <div style="width: 87%;float: left">
                             <h3 class="panel-title" th:text="${m.name}"></h3>
                         </div>
-                        <div style="width: 10%;float: left">
+                        <div style="width: 13%;float: left">
                             <a th:href="@{'/case/'+${m.id}+'/type.html'}">更多>></a>
                         </div>
                     </div>

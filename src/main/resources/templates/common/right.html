@@ -31,9 +31,9 @@
             <div class="panel-body">
                         <span th:each="t:${#servletContext.getAttribute('tags')}">
                             <h4>
-                                <span class="label label-primary">
-                                    <a th:text="${t.name}+'('+${t.cases.size()}+')'" href="#" style="color: white"></a>
-                                </span>
+                                <a th:text="${t.name}+'('+${t.cases.size()}+')'" style="color: white">
+                                    <button type="button" class="btn btn-primary"></button>
+                                </a>
                             </h4>
                         </span>
             </div>
