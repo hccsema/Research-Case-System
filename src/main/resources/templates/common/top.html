@@ -27,7 +27,7 @@
             <ul class="nav nav-pills" style="background: #337AB7;">
                 <li class="active"><a href="/" style="color: white">网站首页</a></li>
                 <li class="active" th:each="m:${#servletContext.getAttribute('types')}" >
-                    <a th:text="${m.name}" href="#" style="color: white"></a>
+                    <a th:text="${m.name}" th:href="@{@{'/case/'+${m.id}+'/type.html'}}" style="color: white"></a>
                 </li>
             </ul>
         </div>
