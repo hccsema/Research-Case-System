@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
@@ -31,8 +33,8 @@ import java.util.List;
  * @author waiter
  */
 @Controller
-@RequestMapping(value = "/file")
-public class FileController {
+@RequestMapping(value = "/doc")
+public class DocController {
     @Autowired
     private DocService docService;
     @Autowired
@@ -52,12 +54,13 @@ public class FileController {
     @ResponseBody
     @Transactional(rollbackOn = Exception.class)
     @RequestMapping(value = "/uploads/{caseId}/{type}")
-    public Object uploads(@RequestParam("files")MultipartFile[] files, @PathVariable() Long caseId, @PathVariable() Integer type) throws IOException {
+    public Object uploads(@RequestParam("files")MultipartFile[] files, @PathVariable() Case caseId, @PathVariable() Integer type) throws IOException {
+        Assert.notEmpty(files,"没有要上传的文件");
+        Assert.notNull(type,"没有选择上传的文件类别");
 
-        Case byId = caseService.findById(caseId);
         for (MultipartFile multipartFile:files){
             Doc doc = new Doc();
-            doc.setPath("/"+byId.getType().getName()+"/"+byId.getName()+"/"+multipartFile.getOriginalFilename());
+            doc.setPath("/"+caseId.getType().getName()+"/"+caseId.getName()+"/"+multipartFile.getOriginalFilename());
             doc.setName(multipartFile.getOriginalFilename());
             doc.setUploadDate(new Date());
             doc.setDownCount(0L);
@@ -68,33 +71,32 @@ public class FileController {
             creatDir(file.getParentFile());
             multipartFile.transferTo(file);
             if (type==1){
-                List<Doc> contents = byId.getContents();
+                List<Doc> contents = caseId.getContents();
                 contents.add(doc);
             }else {
-                List<Doc> solves = byId.getSolves();
+                List<Doc> solves = caseId.getSolves();
                 solves.add(doc);
             }
             docService.save(doc);
         }
-        caseService.save(byId);
+        caseService.save(caseId);
         return null;
     }
 
 
     @RequestMapping("/download/{id}")
-    public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Long id) throws IOException {
+    public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Doc doc) throws IOException {
 
-        Doc byId = docService.findById(id);
+        Assert.notNull(doc,"文件不存在");
 
-
-        FileSystemResource file = new FileSystemResource(basePath+byId.getPath());
+        FileSystemResource file = new FileSystemResource(basePath+doc.getPath());
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"",new String(file.getFilename().getBytes(), StandardCharsets.UTF_8) ));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        byId.setDownCount(byId.getDownCount()+1);
-        docService.save(byId);
+        doc.setDownCount(doc.getDownCount()+1);
+        docService.save(doc);
         return ResponseEntity
                 .ok()
                 .headers(headers)

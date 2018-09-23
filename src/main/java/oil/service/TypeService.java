@@ -28,4 +28,5 @@ public class TypeService {
     public void save(Type type){
         typeDao.save(type);
     }
+
 }
