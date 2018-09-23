@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -94,7 +95,7 @@ public class CaseService {
     }
 
     @Cacheable(value = "CaseService_findTop10ByTypeAndIsExistOrderByTimes")
-    public Page<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type){
+    public List<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type){
         return caseDao.findTop10ByTypeAndIsExistOrderByTimes(type,true);
     }
 

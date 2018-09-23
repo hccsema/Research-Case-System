@@ -25,7 +25,7 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      */
     Page<Case> findAllByTypeAndIsExist(Pageable pageable, Type type,Boolean b);
 
-    Page<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type,Boolean b);
+    List<Case> findTop10ByTypeAndIsExistOrderByTimes(Type type,Boolean b);
 
     /**
      * 通过类别查找前8个
