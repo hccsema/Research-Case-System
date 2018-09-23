@@ -7,6 +7,7 @@ import oil.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,16 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
-    @PostMapping(value = "/add/{userName}")
-    public String addUser(){
+    @PostMapping(value = "/add")
+    public String addUser(User user, Model model){
+        User byUserName = userDetailsService.findByUserName(user.getUsername());
+        if (byUserName!=null){
+            model.addAttribute("msg","用户已存在");
+        }else {
+            user.setPassWord(bCryptPasswordEncoder.encode(user.getUsername()));
+            //user.setAuthorities(false);
+            user.setNonLocked(false);
+        }
         return "";
     }
 

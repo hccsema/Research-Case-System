@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-    public Object findByUserName(String username){
+    public User findByUserName(String username){
         return userDao.findByUserName(username);
     }
 
