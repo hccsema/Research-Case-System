@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import java.util.Date;
  * @author waiter
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CaseService {
     @Autowired
     private CaseDao caseDao;
@@ -71,6 +73,20 @@ public class CaseService {
                         "CaseService_getCountByDate",
                         "CaseService_getCasesByDate"})
     public void save(Case cases){
+        caseDao.save(cases);
+    }
+
+    @CacheEvict(value = {"CaseService_findAllByType",
+                        "CaseService_findById",
+                        "CaseService_findAllByTagsContaining",
+                        "CaseService_getCountByDate",
+                        "CaseService_getCasesByDate"})
+    public void delete(Case c){
+        caseDao.delete(c);
+    }
+
+    @CacheEvict(value = "CaseService_findById")
+    public void changTimes(Case cases){
         caseDao.save(cases);
     }
 

@@ -69,7 +69,7 @@ public class IndexController {
             longCaseHashMap.put(aCase.getId(),aCase);
         }
 
-        model.addAttribute("cases",longCaseHashMap);
+        model.addAttribute("cases",longCaseHashMap.values());
         return "";
     }
 

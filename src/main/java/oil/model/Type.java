@@ -21,6 +21,9 @@ public class Type implements Serializable {
     private Integer id;
     private String name;
     private Boolean isExist;
+    /**
+     * 优先级
+     */
     private Integer grade;
     @OrderBy("date asc ")
     @OneToMany(fetch = FetchType.EAGER)

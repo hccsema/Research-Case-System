@@ -7,14 +7,14 @@ import oil.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by  waiter on 18-9-22  下午6:01.
@@ -35,6 +35,8 @@ public class CaseController {
      */
     @GetMapping(value = "/{id}/case_info.html")
     public String getCaseById(@PathVariable(name = "id")Case c, Model model){
+        c.setTimes(c.getTimes()+1);
+        caseService.save(c);
         model.addAttribute("case",c);
         return "";
     }
@@ -52,9 +54,9 @@ public class CaseController {
                                 @PathVariable(name = "page",required = false) Integer page,
                                 Model model) throws ParseException {
         if (page==null){
-            page=1;
+            page=0;
         }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
         Page<Case> casesByDate = caseService.getCasesByDate(simpleDateFormat.parse(date), page);
         model.addAttribute("cases",casesByDate);
 
@@ -74,7 +76,7 @@ public class CaseController {
                                 @PathVariable(name = "page",required = false) Integer page,
                                 Model model){
         if (page==null){
-            page=1;
+            page=0;
         }
 
         Page<Case> allByTagsContaining = caseService.findAllByTagsContaining(page, tag);
@@ -96,7 +98,7 @@ public class CaseController {
                                 @PathVariable(name = "page",required = false) Integer page,
                                 Model model){
         if (page==null){
-            page=1;
+            page=0;
         }
 
         Page<Case> allByType = caseService.findAllByType(page, type);
@@ -104,6 +106,56 @@ public class CaseController {
 
 
         return "front/more";
+    }
+
+    /**
+     * 彻底删除案例
+     * @param c
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/delete.html")
+    public String deleteCase(@RequestParam(name = "case",required = false) Case c){
+        if (c!=null) {
+            caseService.delete(c);
+        }
+        return "";
+    }
+
+    /**
+     * 删除案例
+     * @param c
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/remove.html")
+    public String removeCase(@RequestParam(name = "case",required = false) Case c){
+        if (c!=null) {
+            c.setIsExist(false);
+            caseService.save(c);
+        }
+        return "";
+    }
+
+    /**
+     * 添加案例
+     * @param c
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/add.html")
+    public String addCase( Case c){
+        Assert.notNull(c,"没有参数");
+
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHHmmss");
+
+        c.setIsExist(true);
+        c.setDate(new Date());
+        c.setTimes(0L);
+        c.setLibId(simpleDateFormat.format(new Date()));
+        System.out.println(c);
+        caseService.save(c);
+        return "";
     }
 
 }
