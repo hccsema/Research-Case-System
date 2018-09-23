@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by  waiter on 18-9-17  下午7:40.
@@ -37,8 +38,13 @@ public class UserController {
             model.addAttribute("msg","用户已存在");
         }else {
             user.setPassWord(bCryptPasswordEncoder.encode(user.getUsername()));
-            //user.setAuthorities(false);
-            user.setNonLocked(false);
+            Role role_user = roleService.getRole("ROLE_USER");
+            LinkedList<Role> objects = new LinkedList<>();
+            objects.add(role_user);
+            user.setAuthorities(objects);
+            user.setNonLocked(true);
+            user.setNonExpired(true);
+            userDetailsService.save(user);
         }
         return "";
     }

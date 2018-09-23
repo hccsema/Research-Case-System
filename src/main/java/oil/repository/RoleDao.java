@@ -15,4 +15,6 @@ public interface RoleDao extends CrudRepository<Role,Integer> {
      * @return
      */
     Role findById(int id);
+
+    Role getFirstByRoleContaining(String role);
 }

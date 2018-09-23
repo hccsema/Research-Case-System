@@ -1,6 +1,7 @@
 package oil.config;
 
 
+import oil.component.CustomLoginSuccessHandler;
 import oil.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsServiceImpl userDetailsServiceIml;
+    private CustomLoginSuccessHandler customLoginSuccessHandler;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsServiceIml;
 
 
 
@@ -48,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/case/**","/file/uploads/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                .formLogin().successHandler(customLoginSuccessHandler)
                 .loginPage("/login")
                 .permitAll()
                 .and()

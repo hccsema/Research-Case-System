@@ -19,4 +19,8 @@ public class RoleService {
     public Role findById(int id){
         return roleDao.findById(id);
     }
+
+    public Role getRole(String role){
+        return roleDao.getFirstByRoleContaining(role);
+    }
 }
