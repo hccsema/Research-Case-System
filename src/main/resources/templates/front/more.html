@@ -34,7 +34,7 @@
                             <img th:src="@{/images/file.png}" style="margin-left: 25%"/>
                         </div>
                         <div  style="width: 80%;float: left;margin-top: 6%">
-                            <a th:text="${c.name}" style="color: black"></a>
+                            <a th:href="@{'/case/'+${c.id}+'/case_info.html'}" th:text="${c.name}" style="color: black"></a>
                             <hr style="margin: 5px"/>
                             <span th:text="${c.introduction}" style="color: gray"></span>
                             <br/><br/>
