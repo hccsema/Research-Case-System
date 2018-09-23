@@ -96,7 +96,7 @@ public class CaseController {
                                 @PathVariable(name = "page",required = false) Integer page,
                                 Model model){
         if (page==null){
-            page=1;
+            page=0;
         }
 
         Page<Case> allByType = caseService.findAllByType(page, type);
