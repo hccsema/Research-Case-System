@@ -59,6 +59,7 @@ public class CaseController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
         Page<Case> casesByDate = caseService.getCasesByDate(simpleDateFormat.parse(date), page);
         model.addAttribute("cases",casesByDate);
+        model.addAttribute("type",date);
 
         return "front/more";
     }
@@ -81,7 +82,7 @@ public class CaseController {
 
         Page<Case> allByTagsContaining = caseService.findAllByTagsContaining(page, tag);
         model.addAttribute("cases",allByTagsContaining);
-
+        model.addAttribute("type",tag);
 
         return "front/more";
     }
@@ -103,7 +104,7 @@ public class CaseController {
 
         Page<Case> allByType = caseService.findAllByType(page, type);
         model.addAttribute("cases",allByType);
-
+        model.addAttribute("type",type);
 
         return "front/more";
     }
