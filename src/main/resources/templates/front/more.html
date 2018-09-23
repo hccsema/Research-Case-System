@@ -11,10 +11,14 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
-        function printInputValue() {
-            var inputValue = document.getElementById("demo").value;
-            console.log(inputValue);
-            document.getElementById("demo2").innerHTML = inputValue;
+        function printInputValue(){
+            var abc = myForm.myInput.value;
+            var def = abc-1;
+            var opq = [[${cases.getTotalPages()}]]-1;
+            if(def>opq){
+                def=opq;
+            }
+            window.location.href="/case/1/"+def+"/type.html";
         }
     </script>
 </head>
@@ -45,19 +49,18 @@
                     <a th:href="@{'/case/'+${cases.getContent().get(0).type.id}+'/'+${cases.getNumber()+1>1?cases.getNumber()-1:0}+'/type.html'}">
                         <button type="button" class="btn btn-default" th:text="'上页'" style="float: left"></button>
                     </a>
-                    <span th:text="'第'" style="float: left;padding: 6px"></span>
-                    <input type="text" id="demo" class="form-control" style="width: 3.5%;float: left" th:value="${cases.getNumber()+1}"/>
-                    <span th:text="'/'+${cases.getTotalPages()}+'页'" style="float: left;padding: 6px;"></span>
-                    <a th:href="@{'/case/'+${cases.getContent().get(0).type.id}+'/type.html'}">
+                    <form th:id="myForm">
+                        <span th:text="'第'" style="float: left;padding: 6px"></span>
+                        <input type="text" id="myInput" class="form-control" style="width: 3.5%;float: left" th:value="${cases.getNumber()+1}"/>
+                        <span th:text="'/'+${cases.getTotalPages()}+'页'" style="float: left;padding: 6px;"></span>
                         <button type="button" class="btn btn-default" onclick="printInputValue()" th:text="'跳转'" style="float: left"></button>
-                    </a>
+                    </form>
                     <a th:href="@{'/case/'+${cases.getContent().get(0).type.id}+'/'+${cases.getNumber()+1<cases.getTotalPages()?cases.getNumber()+1:cases.getTotalPages()-1}+'/type.html'}">
                         <button type="button" class="btn btn-default" th:text="'下页'" style="float: left"></button>
                     </a>
                     <a th:href="@{'/case/'+${cases.getContent().get(0).type.id}+'/'+${cases.getTotalPages()-1}+'/type.html'}">
                         <button type="button" class="btn btn-default" th:text="'尾页'" style="float: left"></button>
                     </a>
-                    <p id="demo2"></p>
                 </div>
             </div>
         </div>

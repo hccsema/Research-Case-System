@@ -31,8 +31,8 @@
             <div class="panel-body">
                         <span th:each="t:${#servletContext.getAttribute('tags')}">
                             <h4>
-                                <a th:text="${t.name}+'('+${t.cases.size()}+')'" style="color: white">
-                                    <button type="button" class="btn btn-primary"></button>
+                                <a style="color: white">
+                                    <button type="button" class="btn btn-primary"  th:text="${t.name}+'('+${t.cases.size()}+')'"></button>
                                 </a>
                             </h4>
                         </span>
