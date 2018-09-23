@@ -20,7 +20,7 @@
             </div>
             <div class="panel-body">
                         <span th:each="t:${#servletContext.getAttribute('types')}">
-                            <a href="#" th:text="${t.name}+' ['+${t.cases.size()}+']'"></a><br/>
+                            <a th:href="@{'/case/'+${t.id}+'/type.html'}" th:text="${t.name}+' ['+${t.cases.size()}+']'"></a><br/>
                         </span>
             </div>
         </div>
