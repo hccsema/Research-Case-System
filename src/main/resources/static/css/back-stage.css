@@ -1,0 +1,22 @@
+
+footer{
+    bottom:0;
+}
+.dropdown-toggle{
+    color: white;
+}
+.dropdown-toggle:hover{
+    background: black;
+    color: #337AB7;
+}
+.active:hover{
+    color: #337AB7;
+}
+.li-a{
+    color: white;
+    background: #337AB7;
+}
+.li-a:hover{
+    color: #337AB7;
+    background: white;
+}
