@@ -27,10 +27,14 @@
         <div style="padding-top: 100px">
             <ul class="nav nav-pills" style="background: #337AB7;">
                 <li class="active"><a href="/" style="color: white">网站首页</a></li>
-                <li class="active" th:each="m:${#servletContext.getAttribute('types')}" >
+                <li  class="active" th:each="m:${#servletContext.getAttribute('types')}" >
                     <a th:text="${m.name}" th:href="@{@{'/case/'+${m.id}+'/type.html'}}" style="color: white"></a>
                 </li>
-                <li class="active"><a href="#" style="color: white">后台管理</a></li>
+
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="active"><a href="#" style="color: white">后台管理</a></li>
+
+
+
             </ul>
         </div>
     </div>

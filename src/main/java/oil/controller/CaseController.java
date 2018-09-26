@@ -87,7 +87,7 @@ public class CaseController {
         model.addAttribute("cases",allByTagsContaining);
         model.addAttribute("type",tag);
 
-        return "front/more";
+        return "front/tag";
     }
 
     /**
