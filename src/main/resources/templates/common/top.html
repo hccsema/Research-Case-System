@@ -29,6 +29,7 @@
                 <li class="active" th:each="m:${#servletContext.getAttribute('types')}" >
                     <a th:text="${m.name}" th:href="@{@{'/case/'+${m.id}+'/type.html'}}" style="color: white"></a>
                 </li>
+                <li class="active"><a href="#" style="color: white">后台管理</a></li>
             </ul>
         </div>
     </div>
