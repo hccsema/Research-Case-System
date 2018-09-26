@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        function printInputValue(){
+            var abc = myForm.myInput.value;
+            var def = abc-1;
+            var opq = [[${cases.getTotalPages()}]]-1;
+            if(def>opq){
+                def=opq;
+            }
+            window.location.href="/case/1/"+def+"/tag.html";
+        }
+    </script>
+</head>
+<body>
+<div th:replace="/common/top::top"></div>
+<div>
+    <div style="width: 76%;height: auto;float: left;margin: 0.5%">
+        <div class="panel panel-default" style="margin: 0.5%;float: left;width: 99%;height: 890px">
+            <div class="panel-heading" style="height: 37.6px" th:text="${type.name}"></div>
+            <div class="panel-body" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
+                <div th:each="c:${cases.getContent()}">
+                    <div style="width: 20%;float: left;margin-top: 6%">
+                        <img th:src="@{/images/file.png}" style="margin-left: 25%"/>
+                    </div>
+                    <div  style="width: 80%;float: left;margin-top: 6%">
+                        <a th:href="@{'/case/'+${c.id}+'/case_info.html'}" th:text="${c.name}" style="color: black"></a>
+                        <hr style="margin: 5px"/>
+                        <span th:text="${c.introduction}" style="color: gray"></span>
+                        <br/><br/>
+                        <span th:text="'日期:'+${#dates.format(c.date,'yyyy-MM-dd HH:mm:ss')}"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 35px;width: 100%;text-align: center">
+                <a th:href="@{'/case/'+${type.id}+'/0/tag.html'}">
+                    <button type="button" class="btn btn-default" th:text="'首页'" style="float: left;margin-left: 25%"></button>
+                </a>
+                <a th:href="@{'/case/'+${type.id}+'/'+${cases.getNumber()+1>1?cases.getNumber()-1:0}+'/tag.html'}">
+                    <button type="button" class="btn btn-default" th:text="'上页'" style="float: left"></button>
+                </a>
+                <form th:id="myForm">
+                    <span th:text="'第'" style="float: left;padding: 6px"></span>
+                    <input type="text" id="myInput" class="form-control" style="width: 3.5%;float: left" th:value="${cases.getNumber()+1}"/>
+                    <span th:text="'/'+${cases.getTotalPages()}+'页'" style="float: left;padding: 6px;"></span>
+                    <button type="button" class="btn btn-default" onclick="printInputValue()" th:text="'跳转'" style="float: left"></button>
+                </form>
+                <a th:href="@{'/case/'+${type.id}+'/'+${cases.getNumber()+1<cases.getTotalPages()?cases.getNumber()+1:cases.getTotalPages()-1}+'/tag.html'}">
+                    <button type="button" class="btn btn-default" th:text="'下页'" style="float: left"></button>
+                </a>
+                <a th:href="@{'/case/'+${type.id}+'/'+${cases.getTotalPages()-1}+'/tag.html'}">
+                    <button type="button" class="btn btn-default" th:text="'尾页'" style="float: left"></button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/common/right::right"></div>
+</div>
+</body>
+</html>

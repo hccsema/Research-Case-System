@@ -31,7 +31,7 @@
             <div class="panel-body">
                         <span th:each="t:${#servletContext.getAttribute('tags')}">
                             <h4>
-                                <a style="color: white">
+                                <a style="color: white" href="#">
                                     <button type="button" class="btn btn-primary"  th:text="${t.name}+'('+${t.cases.size()}+')'"></button>
                                 </a>
                             </h4>
@@ -43,9 +43,9 @@
                 <h3 class="panel-title">日期归档</h3>
             </div>
             <div class="panel-body">
-                        <span th:each="count:${#servletContext.getAttribute('countByDate')}">
-                            <span th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></span><br/>
-                        </span>
+                        <a th:each="count:${#servletContext.getAttribute('countByDate')}">
+                            <a href="#" th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></a><br/>
+                        </a>
             </div>
         </div>
     </div>
