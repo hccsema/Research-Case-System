@@ -59,7 +59,7 @@ public class CaseController {
         if (page==null){
             page=0;
         }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
         Page<Case> casesByDate = caseService.getCasesByDate(simpleDateFormat.parse(date), page);
         model.addAttribute("cases",casesByDate);
         model.addAttribute("type",date);

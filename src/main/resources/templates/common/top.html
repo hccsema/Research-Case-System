@@ -4,6 +4,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+
 </head>
 <body>
     <div th:fragment="top">
@@ -16,19 +17,19 @@
                 <h3><b th:text="${#servletContext.getAttribute('lib').mainTitle}"></b></h3>
             </div>
             <div style="width: 40%;float: left">
-                <div class="input-group" style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 28px">
-                    <input type="text" class="form-control"placeholder="请输入文档名"/>
+                <from class="input-group" style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 28px">
+                    <input type="text" class="form-control" placeholder="请输入文档名"/>
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                     </span>
-                </div>
+                </from>
             </div>
         </div>
         <div style="padding-top: 100px">
             <ul class="nav nav-pills" style="background: #337AB7;">
                 <li class="active"><a href="/" style="color: white">网站首页</a></li>
                 <li  class="active" th:each="m:${#servletContext.getAttribute('types')}" >
-                    <a th:text="${m.name}" th:href="@{@{'/case/'+${m.id}+'/type.html'}}" style="color: white"></a>
+                    <a th:text="${m.name}" th:href="@{'/case/'+${m.id}+'/type.html'}" style="color: white"></a>
                 </li>
 
                     <li sec:authorize="hasRole('ROLE_ADMIN')" class="active"><a href="#" style="color: white">后台管理</a></li>

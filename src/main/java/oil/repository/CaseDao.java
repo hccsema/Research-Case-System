@@ -55,7 +55,7 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * 根据日期归档统计
      * @return
      */
-    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y-%m') days,COUNT(*) as count FROM oil.oil_case where `is_exist`=true GROUP BY days" ,nativeQuery = true)
+    @Query(value = "SELECT DATE_FORMAT(`date`,'%Y%m') days,COUNT(*) as count FROM oil.oil_case where `is_exist`=true GROUP BY days" ,nativeQuery = true)
     Collection<DayAndCount> getCountByDate();
 
     /**

@@ -15,11 +15,10 @@
             var abc = myForm.myInput.value;
             var def = abc-1;
             var opq = [[${cases.getTotalPages()}]]-1;
-            var esd = [[${type}]];
             if(def>opq){
                 def=opq;
             }
-            window.location.href="/case/"+esd+"/"+def+"/date.html";
+            window.location.href="/case/"+[[${type}]]+'/'+def+"/date.html";
         }
     </script>
 </head>
