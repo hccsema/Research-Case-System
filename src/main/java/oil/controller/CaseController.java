@@ -64,7 +64,7 @@ public class CaseController {
         model.addAttribute("cases",casesByDate);
         model.addAttribute("type",date);
 
-        return "front/more";
+        return "front/date";
     }
 
 

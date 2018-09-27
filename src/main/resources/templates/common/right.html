@@ -31,7 +31,7 @@
             <div class="panel-body">
                         <span th:each="t:${#servletContext.getAttribute('tags')}">
                             <h4>
-                                <a style="color: white" href="#">
+                                <a style="color: white" th:href="@{'/case/'+${t.id}+'/tag.html'}">
                                     <button type="button" class="btn btn-primary"  th:text="${t.name}+'('+${t.cases.size()}+')'"></button>
                                 </a>
                             </h4>
@@ -44,7 +44,7 @@
             </div>
             <div class="panel-body">
                         <a th:each="count:${#servletContext.getAttribute('countByDate')}">
-                            <a href="#" th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></a><br/>
+                            <a th:href="@{'/case/'+${count.getDays()}+'/date.html'}" th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></a><br/>
                         </a>
             </div>
         </div>
