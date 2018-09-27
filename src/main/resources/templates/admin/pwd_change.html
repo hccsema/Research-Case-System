@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/back-stage.css}">
+<body>
+<div th:replace="/common/admin/top::top"></div>
+
+<div class="container">
+<div class="row">
+    <div class="page-header" >
+        <h4>管理员账号密码修改</h4>
+    </div>
+    <div class="panel-body">
+        <form role="form" action="#" method="post">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>原密码：</label>
+                    <input class="form-control" name="#">
+                </div>
+
+                <div class="form-group">
+                    <label>新密码：</label>
+                    <input class="form-control" name="#">
+                </div>
+
+
+                <div class="form-group">
+                    <label>再次输入新密码：</label>
+                    <input class="form-control" name="#">
+                </div>
+                <button type="submit" class="btn btn-primary" >确定</button>
+                <button type="reset" class="btn btn-primary"  >重置</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
