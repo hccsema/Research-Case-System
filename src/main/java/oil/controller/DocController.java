@@ -81,7 +81,7 @@ public class DocController {
 
     @Transactional(rollbackFor = Exception.class)
     @RequestMapping("/download/{id}")
-    public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Doc doc) throws IOException {
+    public ResponseEntity<InputStreamResource> downLoad(@PathVariable(value = "id") Doc doc) throws Exception {
 
         Assert.notNull(doc,"文件不存在");
 
