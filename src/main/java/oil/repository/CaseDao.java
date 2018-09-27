@@ -64,7 +64,7 @@ public interface CaseDao extends JpaRepository<Case,Long> {
      * @param pageable
      * @return
      */
-    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true  /* #pageable# */",
+    @Query(value = "SELECT * FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true ",
             countQuery = "SELECT count(*) FROM oil.oil_case WHERE DATE_FORMAT(`date`,'%Y-%m')=DATE_FORMAT(?1,'%Y-%m') AND `is_exist`=true",
             nativeQuery = true)
     Page<Case> findByDate(Date date,Pageable pageable);
