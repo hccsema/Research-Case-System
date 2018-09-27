@@ -63,7 +63,7 @@
                 <div class="panel-heading" style="height: 37.6px" th:text="'案例点击排行'"></div>
                 <div class="panel-body" style="height: 390px">
                     <a th:each="t:${top}">
-                        <a th:text="${t.name}"></a><br/>
+                        <a th:text="${t.name}" th:href="@{'/case/'+${t.id}+'/case_info.html'}"></a><br/>
                     </a>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 <div class="panel-heading" style="height: 37.6px" th:text="'案例内容'"></div>
                 <div class="panel-body" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
                     <a th:each="c:${case.contents}">
-                        <a th:text="${c.name}"></a><br/>
+                        <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a><br/>
                     </a>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <div class="panel-heading" style="height: 37.6px" th:text="'解决方案'"></div>
                 <div class="panel-body" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
                     <a th:each="c:${case.solves}">
-                        <a th:text="${c.name}"></a><br/>
+                        <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a><br/>
                     </a>
                 </div>
             </div>

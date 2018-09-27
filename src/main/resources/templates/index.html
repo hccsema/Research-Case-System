@@ -33,9 +33,11 @@
                             <a th:href="@{'/case/'+${m.id}+'/type.html'}">更多>></a>
                         </div>
                     </div>
-                    <a class="panel-body" th:href="@{'/case/'+${m.id}+'/type.html'}" th:each="c,cStat:${m.cases}" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
-                        <p th:if="${cStat.index<8}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
-                        <p th:if="${cStat.index<8}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
+                    <a th:each="c,cStat:${m.cases}">
+                        <a class="panel-body" th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
+                            <p th:if="${cStat.index<8}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
+                            <p th:if="${cStat.index<8}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
+                        </a>
                     </a>
                 </div>
             </div>
