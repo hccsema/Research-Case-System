@@ -11,57 +11,10 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../../static/css/back-stage.css" rel="stylesheet">
+    <link th:href="@{/css/back-stage.css}" rel="stylesheet">
 </head>
 <body>
-<div>
-    <div style="width: 5%;float: left">
-        <img src="../../static/images/logo.jpg" width="60px" style="margin-top: 17px"/>
-    </div>
-    <div style="width: 55%;float: left;margin-top: 15px">
-        <h5 style="line-height: 0.5px"><b th:text="${#servletContext.getAttribute('lib').subtitle}">石油与天然气工程专业学位课程——采油采气工程设计与应用</b></h5>
-        <h3><b>后台管理</b></h3>
-    </div>
-    <div style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 15px">
-        <h4>您好,<span>Admin</span></h4>
-        <h5><a href="../user/pwdChange.html">修改密码</a> , <a href="#">退出</a> </h5>
-    </div>
-</div>
-
-<div style="padding-top: 100px">
-
-    <ul class="nav nav-pills" style="background: #337AB7;padding-left: 100px">
-        <li class="active"><a class="li-a" href="a_index.html" style="color: white">回到首页</a></li>
-        <li class="active"><a herf="#" >前台构建</a></li>
-
-
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"  >
-                用户管理
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu" style="background: #337AB7">
-                <li class="active"><a href="userControl.html"  >全部用户</a></li>
-                <li class="active"><a href="userAdd.html" >添加用户</a></li>
-            </ul>
-        </li>
-
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"  >
-                项目管理
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu" style="background: #337AB7">
-                <li class="active"><a href="projectCon.html">添加项目</a></li>
-                <li class="active"><a href="projectCon.html">项目变更</a></li>
-            </ul>
-        </li>
-
-
-        <li class="active"><a href="recycleBin.html">回收站</a></li>
-    </ul>
-</div>
-
+<div th:replace="/common/admin/top::top"></div>
 
 
 </body>

@@ -11,20 +11,12 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../../static/css/back-stage.css" rel="stylesheet">
-    <style>
-        footer{
-            bottom:0;
-        }
-        .dropdown-toggle{
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/back-stage.css}">
 </head>
 <body>
 
 <div th:replace="/commom/top::top"></div>
-<div class="container">
+<div class="container">admin
     <!--<div class="panel-heading" >-->
     <!--<p1  style="margin-left:20%; font-size: large;">添加一个新项目</p1>-->
     <!--</div>-->
@@ -58,7 +50,7 @@
             </form>
         </div>
     </div>
-    <div class="footer"> <span>serendipity</span></div>
+
 </div>
 
 </body>
