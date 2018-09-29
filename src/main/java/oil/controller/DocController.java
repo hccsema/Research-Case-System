@@ -86,9 +86,11 @@ public class DocController {
         Assert.notNull(doc,"文件不存在");
 
         FileSystemResource file = new FileSystemResource(basePath+doc.getPath());
+        String s = new String(file.getFilename().getBytes(), StandardCharsets.UTF_8);
+        System.out.println(s);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"",new String(file.getFilename().getBytes(), StandardCharsets.UTF_8) ));
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"","fdkifjd"));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
         doc.setDownCount(doc.getDownCount()+1);

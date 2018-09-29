@@ -32,6 +32,10 @@ public class CaseService {
     @Autowired
     private CaseDao caseDao;
 
+    public Page<Case> recovery(){
+        return caseDao.findAllByIsExist(false);
+    }
+
     @Cacheable(value = "CaseService_findAllByType")
     public Page<Case> findAllByType(int page, Type type){
         PageRequest date = PageRequest.of(page, 5, Sort.by(Sort.Order.desc("date")));
