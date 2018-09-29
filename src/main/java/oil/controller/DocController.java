@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
@@ -90,7 +91,7 @@ public class DocController {
         System.out.println(s);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"","fdkifjd"));
+        headers.add("Content-Disposition", String.format("attachment; fileName="+  s +";filename*=utf-8''"+ URLEncoder.encode(s,"UTF-8")));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
         doc.setDownCount(doc.getDownCount()+1);
