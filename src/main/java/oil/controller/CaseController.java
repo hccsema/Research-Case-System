@@ -118,10 +118,12 @@ public class CaseController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/recovery")
-    public String getRecovery(Model model){
-
-        model.addAttribute("cases",caseService.recovery());
+    @GetMapping(value = {"/recovery/{page}","/recovery"})
+    public String getRecovery(Model model,@PathVariable(name = "page",required = false) Integer page){
+        if (page==null){
+            page=0;
+        }
+        model.addAttribute("cases",caseService.recovery(page));
         return "";
     }
 
@@ -192,7 +194,7 @@ public class CaseController {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = "/add.html")
+    @PostMapping(value = "/change.html")
     public String changeCase( Case c){
         Assert.notNull(c,"没有参数");
 

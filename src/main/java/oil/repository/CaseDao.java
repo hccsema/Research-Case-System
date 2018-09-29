@@ -17,7 +17,7 @@ import java.util.*;
  * @author waiter
  */
 public interface CaseDao extends JpaRepository<Case,Long> {
-    Page<Case> findAllByIsExist(Boolean b);
+    Page<Case> findAllByIsExist(Boolean b,Pageable pageable);
     /**
      * 通过类别分页查找
      * @param pageable
