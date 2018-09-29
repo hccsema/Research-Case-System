@@ -55,4 +55,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void saveAll(Iterable<User> list ){
         userDao.saveAll(list);
     }
+
+    public Iterable<User> findAll(){
+        return userDao.findAll();
+    }
+
+    public void delete(User user){
+        userDao.delete(user);
+    }
 }

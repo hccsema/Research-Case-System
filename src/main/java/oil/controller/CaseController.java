@@ -1,6 +1,7 @@
 package oil.controller;
 
 import oil.model.Case;
+import oil.model.Doc;
 import oil.model.Tag;
 import oil.model.Type;
 import oil.service.CaseService;
@@ -113,6 +114,29 @@ public class CaseController {
     }
 
     /**
+     * 回收列表
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/recovery")
+    public String getRecovery(Model model){
+
+        model.addAttribute("cases",caseService.recovery());
+        return "";
+    }
+
+    /**
+     * 回收
+     * @param c
+     * @return
+     */
+    @PostMapping(value = "/recovery/{case}")
+    public String recovery(@PathVariable(name = "case") Case c){
+        c.setIsExist(true);
+        caseService.save(c);
+        return "";
+    }
+    /**
      * 彻底删除案例
      * @param c
      * @return
@@ -151,7 +175,7 @@ public class CaseController {
     public String addCase( Case c){
         Assert.notNull(c,"没有参数");
 
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHH");
 
         c.setIsExist(true);
         c.setDate(new Date());
@@ -161,5 +185,20 @@ public class CaseController {
         caseService.save(c);
         return "";
     }
+
+    /**
+     * 修改案例
+     * @param c
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/add.html")
+    public String changeCase( Case c){
+        Assert.notNull(c,"没有参数");
+
+        caseService.save(c);
+        return "";
+    }
+
 
 }

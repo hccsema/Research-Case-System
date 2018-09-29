@@ -1,5 +1,6 @@
 package oil.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ public class User implements UserDetails , Serializable {
     private Integer id;
     private String nickName;
     private String userName;
+    @JsonIgnore
     private String passWord;
     private String email;
     private Date lastLoginDate;

@@ -68,7 +68,7 @@ spring:
       value: sf
 
 doc:
-  path: B:/
+  path: /home/waiter/logs
 
 
 logging:
