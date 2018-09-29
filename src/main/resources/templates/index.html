@@ -10,6 +10,12 @@
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        function f() {
+            var av = document.getElementById("myI").value;
+            window.location.href="/search/"+av;
+        }
+    </script>
     <style>
         a{
             color: black;
@@ -24,8 +30,18 @@
 </head>
 <body>
     <div th:replace="/common/top::top"></div>
+    <div style="width: 30%;float: right;margin-right: 1%">
+        <from th:id="myF" class="input-group" style="width: 200px;float: right">
+            <input id="myI" type="text" class="form-control" placeholder="请输入文档名"/>
+            <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="f()"><i class="fa fa-search"></i></button>
+                    </span>
+        </from>
+    </div>
     <div>
-        <div th:replace="/common/right::right"></div>
+        <div style="margin-top: 80px">
+            <div th:replace="/common/right::right"></div>
+        </div>
         <div style="width: 76%;height: auto;float: left;margin: 0.5%">
             <div th:each="m:${#servletContext.getAttribute('types')}">
                 <div class="panel panel-default" style="margin: 0.5%;float: left;width: 49%;height: 300px;border: none">

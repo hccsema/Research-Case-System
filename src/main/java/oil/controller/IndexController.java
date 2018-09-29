@@ -70,7 +70,7 @@ public class IndexController {
         }
 
         model.addAttribute("cases",longCaseHashMap.values());
-        return "";
+        return "front/search";
     }
 
 }

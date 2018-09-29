@@ -12,17 +12,25 @@
             <div style="width: 8%;float: left">
                 <img th:src="@{/images/logo2.png}" width="90px" style="margin-top: 17px"/>
             </div>
-            <div style="width: 52%;float: left;margin-top: 15px">
+            <div style="width: 85%;float: left;margin-top: 15px">
                 <h5 style="line-height: 0.5px"><b th:text="${#servletContext.getAttribute('lib').subtitle}">石油与天然气工程专业学位课程——采油采气工程设计与应用</b></h5>
                 <h3><b th:text="${#servletContext.getAttribute('lib').mainTitle}"></b></h3>
             </div>
-            <div style="width: 40%;float: left">
-                <from class="input-group" style="top:10px;width: 200px;float: right;margin-right: 20px;margin-top: 28px">
-                    <input type="text" class="form-control" placeholder="请输入文档名"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                    </span>
-                </from>
+            <div style="width: 7%;float: left;margin-top: 29px">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0">
+                            <i class="fa fa-user-circle fa-3x"></i>
+                            <!--<b class="caret" style="margin-bottom: 35%;margin-left: 5px"></b>-->
+                        </a>
+                        <ul class="dropdown-menu" style="width: 20px">
+                            <li><a href="#">登录</a></li>
+                            <li><a href="#">注册</a></li>
+                            <li><a href="#">登出</a></li>
+                            <li><a href="#">后台</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <nav class="nav" style="padding-top: 100px">
