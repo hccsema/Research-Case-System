@@ -32,6 +32,9 @@ public class User implements UserDetails , Serializable {
     private String lastLoginIp;
     private String thisLoginIp;
 
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
+
     /**
      * 是否过期false为已过期
      */
@@ -100,4 +103,8 @@ public class User implements UserDetails , Serializable {
                 ", authorities=" + authorities +
                 '}';
     }
+}
+
+enum Sex{
+    男,女
 }
