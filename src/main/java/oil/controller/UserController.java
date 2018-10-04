@@ -96,13 +96,12 @@ public class UserController {
 
         String remoteUser = request.getRemoteUser();
         User byUserName = userDetailsService.findByUserName(remoteUser);
-        byUserName.setPassWord(bCryptPasswordEncoder.encode(pwd));
-        model.addAttribute("msg","修改成功");
-        return "user/pwd_change";
+
         if (bCryptPasswordEncoder.matches(oldPwd,byUserName.getPassword())) {
             byUserName.setPassWord(bCryptPasswordEncoder.encode(pwd));
         }
-        return "";
+        model.addAttribute("msg","修改成功");
+        return "user/pwd_change";
     }
 
 
