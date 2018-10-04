@@ -52,9 +52,11 @@ public class UserController {
             user.setAuthorities(objects);
             user.setNonLocked(true);
             user.setNonExpired(true);
+
             userDetailsService.save(user);
+            model.addAttribute("msg","添加成功");
         }
-        return "";
+        return "admin/userAdd";
     }
 
 
@@ -70,7 +72,8 @@ public class UserController {
         User byId = userDetailsService.findById(user.getId());
         user.setPassWord(byId.getPassword());
         userDetailsService.save(user);
-        return "";
+        model.addAttribute("msg","更新成功");
+        return "user/user_info";
     }
 
     /**
@@ -86,13 +89,14 @@ public class UserController {
         Assert.hasLength(pwd,"密码不为空");
         if (pwd.length()<7){
             model.addAttribute("msg","密码长度大于6");
-            return "";
+            return "user/pwd_change";
         }
 
         String remoteUser = request.getRemoteUser();
         User byUserName = userDetailsService.findByUserName(remoteUser);
         byUserName.setPassWord(bCryptPasswordEncoder.encode(pwd));
-        return "";
+        model.addAttribute("msg","修改成功");
+        return "user/pwd_change";
     }
 
 
@@ -124,7 +128,7 @@ public class UserController {
     @GetMapping(value = "/get")
     public String getAll(Model model){
         model.addAttribute("users",userDetailsService.findAll());
-        return "";
+        return "admin/userControl";
     }
 
     /**

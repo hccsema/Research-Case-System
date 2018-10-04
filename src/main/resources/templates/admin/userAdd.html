@@ -26,34 +26,29 @@
 <body>
     <div th:replace="/common/admin/top::top"></div>
         <div class="container">
-            <div class="panel-heading" >
-                <p1  style="margin-left:40%; font-size: large;">添加用户</p1>
+            <div class="page-header" >
+                <h4>添加新用户</h4>
+                <h th:text="${msg}"></h>
             </div>
             <div class="row">
-                <form role="form" action="#" method="post">
+                <form role="form" th:action="@{/user/add}" method="post">
                     <div class="col-lg-6"> 必要信息
                         <div class="form-group">
                             <label>学号</label>
-                            <input class="form-control" name="#">
+                            <input class="form-control" name="userName">
                         </div>
-
 
                         <div class="form-group">
                             <label>姓名</label>
-                            <input class="form-control" name="#">
+                            <input class="form-control" name="nickName">
                         </div>
 
                         <div class="form-group">
                             <label for="disabledSelect-sex">性别</label>
-                            <select id="disabledSelect-sex" class="form-control" name="sex">
+                            <select id="disabledSelect-sex" class="form-control" name="#">
                                 <option value="0">男</option>
                                 <option value="1">女</option>
                             </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>身份证号</label>
-                            <input class="form-control" name="idCard">
                         </div>
 
                     </div>
@@ -66,7 +61,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Telephone Number</label>
+                            <label>权级</label>
                             <input class="form-control" name="#">
                         </div>
 
@@ -74,18 +69,16 @@
 
                             <label>邮箱</label>
 
-                            <input class="form-control" name="#">
-
+                            <input class="form-control" name="email">
                         </div>
 
-                        <button type="submit" class="btn btn-primary" >完成</button>
+                        <button type="submit" class="btn btn-primary" >添加</button>
                         <button type="reset" class="btn btn-primary"  >重置</button>
                     </div>
 
                 </form>
 
             </div>
-            <div class="footer"> <span>serendipity</span></div>
         </div>
 
 </body>

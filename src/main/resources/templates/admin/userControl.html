@@ -33,32 +33,20 @@
                 <tr>
                     <th>姓名</th>
                     <th>账号</th>
-                    <th>密码</th>
+                    <th>性别</th>
                     <th>邮箱</th>
                     <th>权级</th>
+                    <th>最后登录时间</th>
                  </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Randall Hu</td>
-                        <td>1501020415</td>
-                        <td>123456</td>
-                        <td>865584045@qq.com</td>
+                <tbody >
+                    <tr th:each="m:${users}">
+                        <td th:text="${m.nickName}"></td>
+                        <td th:text="${m.getUsername()}"></td>
+                        <td></td>
+                        <td th:text="${m.email}"></td>
                         <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Ranlly Bai</td>
-                        <td>1501020416</td>
-                        <td>123456</td>
-                        <td></td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>Henly Wei</td>
-                        <td>1501020416</td>
-                        <td>123456</td>
-                        <td></td>
-                        <td>3</td>
+                        <td th:text="${m.lastLoginDate}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -80,7 +68,7 @@
             "sInfoPostFix": "",
             "sSearch": "搜索:",
             "sUrl": "",
-            "sEmptyTable": "表中数据为空",
+            "sEmptyTable": "暂无任何用户",
             "sLoadingRecords": "载入中...",
             "sInfoThousands": ",",
             "oPaginate": {

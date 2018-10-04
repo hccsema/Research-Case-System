@@ -82,4 +82,22 @@ public class User implements UserDetails , Serializable {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", email='" + email + '\'' +
+                ", lastLoginDate=" + lastLoginDate +
+                ", thisLoginDate=" + thisLoginDate +
+                ", lastLoginIp='" + lastLoginIp + '\'' +
+                ", thisLoginIp='" + thisLoginIp + '\'' +
+                ", nonExpired=" + nonExpired +
+                ", nonLocked=" + nonLocked +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

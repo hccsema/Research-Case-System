@@ -73,6 +73,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         byUserName.setThisLoginDate(new Date());
         byUserName.setThisLoginIp(ip);
         logger.info("登录用户:" + user);
+        request.getSession().setAttribute("userinfo",byUserName);
         this.userDetailsService.save(byUserName);
     }
 

@@ -11,47 +11,81 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" th:href="@{/css/back-stage.css}">
+
+    <style>
+        a{
+            color: black;
+        }
+        a:hover{
+            color: #A80000;
+        }
+        .top{
+            color: white;
+        }
+        .btn {
+            background: #A80000;
+        }
+        .btn:hover{
+            background: red;
+        }
+    </style>
 </head>
 <body>
 
-<div th:replace="/commom/top::top"></div>
-<div class="container">admin
-    <!--<div class="panel-heading" >-->
-    <!--<p1  style="margin-left:20%; font-size: large;">添加一个新项目</p1>-->
-    <!--</div>-->
-
+<div th:replace="/common/top::top"></div>
+<div class="container">
+    <div class="page-header" >
+        <h4>用户账号密码修改</h4>
+        <h4 th:text="${msg}" style="color: red"></h4>
+    </div>
     <div class="row">
-        <div class="page-header" >
-            <h4>管理员账号密码修改</h4>
-        </div>
         <div class="panel-body">
-            <form role="form" action="#" method="post">
+            <form role="form" th:action="@{/user/change_pwd}" method="post">
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label>原密码：</label>
-                        <input class="form-control" name="#">
+                        <input class="form-control" type="password" name="#" required="required">
                     </div>
 
                     <div class="form-group">
                         <label>新密码：</label>
-                        <input class="form-control" name="#">
+                        <input class="form-control" type="password" name="#" required="required">
                     </div>
 
 
                     <div class="form-group">
                         <label>再次输入新密码：</label>
-                        <input class="form-control" name="#">
+                        <input class="form-control" type="password" name="pwd" required="required">
                     </div>
-                    <button type="submit" class="btn btn-primary" >确定修改</button>
-                    <button type="reset" class="btn btn-primary"  >reset</button>
+                    <div width="">
+                        <button type="reset" class="btn btn-primary"  >重置</button>
+                        <button type="submit" class="btn btn-primary" >确定</button>
+                    </div>
                 </div>
 
             </form>
         </div>
     </div>
-
 </div>
-
+<script>
+    $('#pwd_submit').click(function () {
+        var pwd = $("#new_pwd").val();
+        var repwd = $("#re_pwd").val();
+        var oldpwd = $("#old_pwd").val();
+        if(pwd.length<7 || pwd.length>32 || repwd.length<7 || repwd.length>32 ){
+            alert("密码长度不符合规则");
+            return false;
+        }
+        if(pwd !== repwd){
+            alert("两次输入的密码不一致");
+            return false;
+        }
+        if(oldpwd === pwd){
+            alert("新密码与旧密码不能相同");
+            return false;
+        }
+        $('#pwd_submit').submit();
+    });
+</script>
 </body>
 </html>
