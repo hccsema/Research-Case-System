@@ -69,6 +69,8 @@ public class UserController {
     public String changeUser(User user, Model model){
         User byId = userDetailsService.findById(user.getId());
         user.setPassWord(byId.getPassword());
+        user.setNonLocked(true);
+        user.setNonExpired(true);
         userDetailsService.save(user);
         return "";
     }
