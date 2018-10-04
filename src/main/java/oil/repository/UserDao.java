@@ -2,6 +2,8 @@ package oil.repository;
 
 
 import oil.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.LinkedList;
@@ -32,4 +34,6 @@ public interface UserDao extends CrudRepository<User,Integer> {
      * @return
      */
     User findUserByEmail(String email);
+
+    Page<User> getAll(Pageable pageable);
 }

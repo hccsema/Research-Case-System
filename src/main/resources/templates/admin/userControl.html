@@ -36,17 +36,18 @@
                     <th>性别</th>
                     <th>邮箱</th>
                     <th>权级</th>
-                    <th>最后登录时间</th>
                  </tr>
                 </thead>
                 <tbody >
                     <tr th:each="m:${users}">
-                        <td th:text="${m.nickName}"></td>
+                        <td >
+                             <a th:href="@{'get/'+${m.id}}" th:text="${m.nickName}">
+                             </a>
+                        </td>
                         <td th:text="${m.getUsername()}"></td>
-                        <td></td>
+                        <td th:text="${m.sex}"></td>
                         <td th:text="${m.email}"></td>
                         <td>1</td>
-                        <td th:text="${m.lastLoginDate}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -54,6 +55,7 @@
 </div>
 </body>
 <script>
+
     $(document).ready( function () {
         $('#table-user').DataTable();
     } );

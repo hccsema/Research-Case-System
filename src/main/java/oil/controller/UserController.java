@@ -78,6 +78,25 @@ public class UserController {
         return "user/user_info";
     }
 
+
+    /**
+     * 修改用户(admin)
+     * @param user
+     * @param model
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/change2")
+    public String changeUserByAdmin(User user, Model model){
+        User byId = userDetailsService.findById(user.getId());
+        user.setPassWord(byId.getPassword());
+        user.setNonLocked(true);
+        user.setNonExpired(true);
+        userDetailsService.save(user);
+        model.addAttribute("msg","更新成功");
+        return "admin/user_info";
+    }
+
     /**
      *修改密码
      */
@@ -130,10 +149,19 @@ public class UserController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/get")
-    public String getAll(Model model){
-        model.addAttribute("users",userDetailsService.findAll());
+    @GetMapping(value = {"/get/{page}","/get"})
+    public String getAll(Model model,@PathVariable(name = "page",required = false) Integer page){
+        if (page==null){
+            page=0;
+        }
+        model.addAttribute("users",userDetailsService.findAll(page));
         return "admin/userControl";
+    }
+    @RolesAllowed("ROLE_ADMIN")
+    @GetMapping(value = "/get/{id}/info")
+    public String getUser(@PathVariable(name = "id") User user,Model model){
+        model.addAttribute("user",user);
+        return "admin/user_info";
     }
 
     /**
