@@ -79,8 +79,8 @@ public class UserController {
      *修改密码
      */
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = {"/change_pwd","/change_pwd/{id}"})
-    public String changePassWd(@PathVariable(name = "id",required = false) Integer id,
+    @PostMapping(value = {"/change_pwd"})
+    public String changePassWd(String oldPwd,
                                String pwd,
                                HttpServletRequest request,
                                Model model){
@@ -93,7 +93,9 @@ public class UserController {
 
         String remoteUser = request.getRemoteUser();
         User byUserName = userDetailsService.findByUserName(remoteUser);
-        byUserName.setPassWord(bCryptPasswordEncoder.encode(pwd));
+        if (bCryptPasswordEncoder.matches(oldPwd,byUserName.getPassword())) {
+            byUserName.setPassWord(bCryptPasswordEncoder.encode(pwd));
+        }
         return "";
     }
 
@@ -104,7 +106,7 @@ public class UserController {
     @RolesAllowed("ROLE_ADMIN")
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = {"/change_pwd/{id}"})
-    public String changePassWdAdmin(@PathVariable(name = "id",required = false) User user,
+    public String changePassWdAdmin(@PathVariable(name = "id") User user,
                                String pwd,
                                Model model){
         Assert.notNull(pwd,"密码不为空");
