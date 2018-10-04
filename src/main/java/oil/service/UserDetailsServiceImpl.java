@@ -61,7 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public Page<User> findAll(Integer page){
         PageRequest id = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("id")));
-        return userDao.getAll(id);
+        return userDao.findAll(id);
     }
 
     public void delete(User user){

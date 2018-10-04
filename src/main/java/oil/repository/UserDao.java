@@ -35,5 +35,5 @@ public interface UserDao extends CrudRepository<User,Integer> {
      */
     User findUserByEmail(String email);
 
-    Page<User> getAll(Pageable pageable);
+    Page<User> findAll(Pageable pageable);
 }
