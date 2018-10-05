@@ -11,8 +11,8 @@
                 <img th:src="@{/images/logo2.png}" width="90px" style="margin-top: 17px"/>
             </div>
             <div style="width:75%;float: left;margin-top: 15px">
-                <h5 style="line-height: 0.5px"><b th:text="${#servletContext.getAttribute('lib').subtitle}">石油与天然气工程专业学位课程——采油采气工程设计与应用</b></h5>
                 <h3><b>后台管理</b></h3>
+                <h5>Back-stage Management</h5>
             </div>
             <div style="top:10px;width: 100px;float: right;margin-right: 20px;margin-top: 15px">
                 <h4>您好,<span>Admin</span></h4>
@@ -40,12 +40,12 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"  >
-                        项目管理
+                        案例管理
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu" style="background: #337AB7">
-                        <li class="active"><a th:href="@{/admin/projectCon}">添加项目</a></li>
-                        <li class="active"><a th:href="@{/admin/projectCon}">项目变更</a></li>
+                        <li class="active"><a th:href="@{/admin/projectCon}">案例添加</a></li>
+                        <li class="active"><a th:href="@{/admin/projectCon}">案例变更</a></li>
                     </ul>
                 </li>
                 <li class="active"><a th:href="@{/admin/recycleBin}">回收站</a></li>
