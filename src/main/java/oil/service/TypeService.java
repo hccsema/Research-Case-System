@@ -30,7 +30,8 @@ public class TypeService {
         typeDao.save(type);
     }
 
-    public void saveAll(List<Type> types) {
-        typeDao.saveAll(types);
+    public Type findById(Integer id){
+        return typeDao.getById(id);
     }
+
 }

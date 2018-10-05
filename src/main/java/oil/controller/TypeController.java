@@ -57,7 +57,9 @@ public class TypeController {
     @PostMapping(value = "/change")
     public String changeType(Type type,Model model){
         Assert.notNull(type,"未知参数");
+        Type byId = typeService.findById(type.getId());
         type.setIsExist(true);
+        type.setCases(byId.getCases());
         typeService.save(type);
         InitListener.getApplicatonContext().getServletContext().setAttribute("types",typeService.findAll());
         return findAll(model);

@@ -12,4 +12,5 @@ import java.util.ArrayList;
  */
 public interface TypeDao extends JpaRepository<Type,Integer> {
     ArrayList<Type> findAllByIsExistOrderByGradeAsc(boolean b);
+    Type getById(Integer id);
 }

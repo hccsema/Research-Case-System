@@ -35,7 +35,6 @@
             <div th:each="t:${types}">
                 <form role="form" th:action="@{/type/change}" method="post" style="margin-bottom: 20px;height: 40px">
                     <input type="hidden" name="id" th:value="${t.id}">
-                    <input type="hidden" name="cases" th:value="${t.cases}">
                     <b style="width: 5%;float: left;margin-right: 1%;margin-top: 7px">显示顺序</b>
                     <input class="form-control" style="width: 20%;float: left;margin-right: 2%" th:value="${t.getGrade()}" th:name="grade">
                     <b style="width: 5%;float: left;margin-right: 1%;margin-top: 7px">类别名称</b>
