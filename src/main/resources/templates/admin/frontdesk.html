@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+    <!--&lt;!&ndash; jQuery &ndash;&gt;-->
+    <!--<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+    <link th:href="@{/css/back-stage.css}" rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="/common/admin/top::top"></div>
+<div class="container">
+
+    <div class="row">
+        <div class="page-header">
+            <h4>添加一个新案例</h4>
+        </div>
+        <div class="panel-body">
+            <form role="form" th:action="@{/lib/change}" method="post">
+
+                <div class="col-lg-6">
+                    <div class="form-group" style="margin-bottom: 50px">
+                        <label>库名称一</label>
+                        <input class="form-control" name="mainTitle" th:value="${lib.getMainTitle()}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>库名称二</label>
+                        <input class="form-control" name="subtitle" th:value="${lib.getSubtitle()}">
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>例库简介</label>
+                        <textarea class="form-control" row="3" name="introduction" style="height: 150px" th:text="${lib.getIntroduction()}"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >修改</button>
+                    <button type="reset" class="btn btn-primary"  >重置</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

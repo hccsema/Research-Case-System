@@ -1,5 +1,6 @@
 package oil.controller;
 
+import oil.listener.InitListener;
 import oil.model.Lib;
 import oil.service.LibService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,20 @@ public class LibController {
     public String getLib(Model model){
         Lib lib = libService.getLib();
         model.addAttribute("lib",lib);
-        return "";
+        return "admin/frontdesk";
     }
 
     @PostMapping(value = "change")
     public String change(String introduction,
                          String subtitle,
-                         String mainTitle){
+                         String mainTitle,
+                         Model model){
         Lib lib = libService.getLib();
         lib.setIntroduction(introduction);
         lib.setSubtitle(subtitle);
         lib.setMainTitle(mainTitle);
         libService.save(lib);
-        return "";
+        InitListener.getApplicatonContext().getServletContext().setAttribute("lib",lib);
+        return getLib(model);
     }
 }
