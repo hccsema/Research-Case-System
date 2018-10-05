@@ -90,12 +90,12 @@ public class CaseService {
                         "CaseService_findAllByTagsContaining",
                         "CaseService_getCountByDate",
                         "CaseService_getCasesByDate",
-                        "CaseService_findTop10ByTypeAndIsExistOrderByTimes"})
+                        "CaseService_findTop10ByTypeAndIsExistOrderByTimes"},allEntries=true)
     public void delete(Case c){
         caseDao.delete(c);
     }
 
-    @CacheEvict(value = "CaseService_findById")
+    @CacheEvict(value = "CaseService_findById",allEntries=true)
     public void changTimes(Case cases){
         caseDao.save(cases);
     }

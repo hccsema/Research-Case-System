@@ -28,7 +28,7 @@ public class TagService {
         return tagDao.findAllByIsExistAndNameContaining(true,search);
     }
 
-    @CacheEvict(value = "TagService_findAll")
+    @CacheEvict(value = "TagService_findAll",allEntries=true)
     public void save(Tag tag){
         tagDao.save(tag);
     }
