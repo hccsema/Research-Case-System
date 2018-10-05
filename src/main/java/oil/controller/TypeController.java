@@ -57,7 +57,7 @@ public class TypeController {
     @PostMapping(value = "/change")
     public String changeType(Type type,Model model){
         Assert.notNull(type,"未知参数");
-        if (type.getId()==null) {
+        if (type.getId()!=null) {
             Type byId = typeService.findById(type.getId());
             type.setCases(byId.getCases());
         }

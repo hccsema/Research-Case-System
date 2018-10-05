@@ -22,11 +22,44 @@
 
     <link th:href="@{/css/back-stage.css}" rel="stylesheet">
 
+    <script>
+        function openme(){
+            document.getElementById('form').style.display='block';
+        }
+    </script>
+    <style>
+        #form {
+            margin: 0px;padding:0;
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            height: 100%;
+            width: 100%;
+            background: white;
+            filter:Alpha(opacity=30);
+        }
+    </style>
 </head>
 <body>
 <div th:replace="/common/admin/top::top"></div>
+<form id="form" th:action="@{/type/change}" method="post">
+    <div style="margin-left: 5%;height: 200px;padding-top: 200px">
+        <input type="hidden" name="id" value="">
+        <b style="width: 5%;float: left;margin-right: 1%;margin-top: 7px">显示顺序</b>
+        <input class="form-control" style="width: 20%;float: left;margin-right: 2%" name="grade">
+        <b style="width: 5%;float: left;margin-right: 1%;margin-top: 7px">类别名称</b>
+        <input class="form-control" style="width: 50%;float: left;margin-right: 2%" name="name">
+        <button type="submit" class="btn btn-primary" style="width: 5%;float: left;margin-right: 1%">添加</button>
+    </div>
+</form>
 <div class="container">
+    <div class="row">
+        <div class="panel-body">
 
+        </div>
+    </div>
+</div>
+<div class="container">
     <div class="row">
         <div class="page-header">
             <h4>类别信息修改</h4>
@@ -40,13 +73,14 @@
                     <b style="width: 5%;float: left;margin-right: 1%;margin-top: 7px">类别名称</b>
                     <input class="form-control" style="width: 50%;float: left;margin-right: 2%" th:value="${t.getName()}" th:name="name">
                     <button type="submit" class="btn btn-primary" style="width: 5%;float: left;margin-right: 1%">修改</button>
-                    <button class="btn btn-danger" th:action="@{/type/remove/${t.id}}" th:method="get" style="width: 5%;float: left;margin-right: 1%">删除</button>
+                    <a th:href="@{/type/remove/}+${t.id}" style="color: red;font-size: x-large;margin-left: 1%">×</a>
                 </form>
             </div>
             <div>
+
                 <b style="float: left;margin-top: 10px;margin-right: 1%">添加分类</b>
-                <button type="button" class="btn btn-default" style="float: left">
-                    <b style="font-size: large;">+</b>
+                <button type="button" class="btn btn-default" style="float: left" onclick="openme()">
+                    <b>+</b>
                 </button>
             </div>
         </div>
