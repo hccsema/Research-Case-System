@@ -175,7 +175,7 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/add.html")
-    public String addCase( Case c){
+    public String addCase( Case c,Model model){
         Assert.notNull(c,"没有参数");
 
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHH");
@@ -186,7 +186,8 @@ public class CaseController {
         c.setLibId(simpleDateFormat.format(new Date()));
         System.out.println(c);
         caseService.save(c);
-        return "";
+        model.addAttribute("msg","添加成功");
+        return "admin/case_add";
     }
 
     /**
@@ -196,11 +197,12 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/change.html")
-    public String changeCase( Case c){
+    public String changeCase( Case c,Model model){
         Assert.notNull(c,"没有参数");
 
         caseService.save(c);
-        return "";
+        model.addAttribute("msg","变更成功");
+        return "admin/case_change";
     }
 
     @RolesAllowed("ROLE_ADMIN")
@@ -208,7 +210,7 @@ public class CaseController {
     public String getAll(Model model){
         List<Case> allByIsExist = caseService.findAllByIsExist(true);
         model.addAttribute("cases",allByIsExist);
-        return "";
+        return "admin/case_all";
     }
 
 }
