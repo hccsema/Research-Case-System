@@ -28,4 +28,14 @@ public class Type implements Serializable {
     @OrderBy("date desc ")
     @OneToMany(fetch = FetchType.EAGER)
     private List<Case> cases=new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Type{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isExist=" + isExist +
+                ", grade=" + grade +
+                '}';
+    }
 }
