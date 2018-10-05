@@ -5,6 +5,7 @@ import oil.model.User;
 import oil.service.RoleService;
 import oil.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-17  下午7:40.
@@ -144,6 +147,8 @@ public class UserController {
         return "";
     }
 
+
+
     /**
      * 获取用户列表
      * @param model
@@ -200,6 +205,36 @@ public class UserController {
     @PostMapping(value = "/delete")
     public String delete(@RequestParam(name = "id") User user) {
         userDetailsService.delete(user);
+        return "";
+    }
+
+    /**
+     * 授权
+     * @param user
+     * @return
+     */
+    @RolesAllowed("ROLE_ADMIN")
+    @PostMapping(value = "/give_role")
+    public String giveRole(@RequestParam(name = "id") User user) {
+        Role roleUser = roleService.getRole("ROLE_ADMIN");
+        List<Role> authorities = (List<Role>) user.getAuthorities();
+        authorities.add(roleUser);
+        userDetailsService.save(user);
+        return "";
+    }
+
+    /**
+     * 撤销权限
+     * @param user
+     * @return
+     */
+    @RolesAllowed("ROLE_ADMIN")
+    @PostMapping(value = "/remove_role")
+    public String removeRole(@RequestParam(name = "id") User user) {
+        Role roleUser = roleService.getRole("ROLE_ADMIN");
+        List<Role> authorities = (List<Role>) user.getAuthorities();
+        authorities.remove(roleUser);
+        userDetailsService.save(user);
         return "";
     }
 
