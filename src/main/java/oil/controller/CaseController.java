@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -202,5 +203,12 @@ public class CaseController {
         return "";
     }
 
+    @RolesAllowed("ROLE_ADMIN")
+    @GetMapping(value = "/get")
+    public String getAll(Model model){
+        List<Case> allByIsExist = caseService.findAllByIsExist(true);
+        model.addAttribute("cases",allByIsExist);
+        return "";
+    }
 
 }

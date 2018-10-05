@@ -105,4 +105,8 @@ public class CaseService {
         return caseDao.findTop10ByTypeAndIsExistOrderByTimesDesc(type,true);
     }
 
+    public List<Case> findAllByIsExist(Boolean b){
+        return caseDao.findAllByIsExist(b);
+    }
+
 }
