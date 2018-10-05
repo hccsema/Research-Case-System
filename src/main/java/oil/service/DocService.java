@@ -19,7 +19,7 @@ public class DocService {
     @Autowired
     private DocDao docDao;
 
-    @CacheEvict(value = "DocService_findById")
+    @CacheEvict(value = "DocService_findById",allEntries=true)
     public void save(Doc doc){
         docDao.save(doc);
     }

@@ -25,7 +25,7 @@ public class TypeService {
         return typeDao.findAllByIsExistOrderByGradeAsc(true);
     }
 
-    @CacheEvict(value = "TypeService_findAll")
+    @CacheEvict(value = "TypeService_findAll",allEntries=true)
     public void save(Type type){
         typeDao.save(type);
     }

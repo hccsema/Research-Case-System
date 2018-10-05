@@ -25,7 +25,7 @@ public class LibService {
         return all.size()>0?all.get(0):null;
     }
 
-    @CacheEvict(value = "LibService_getLib")
+    @CacheEvict(value = "LibService_getLib",allEntries=true)
     public void save(Lib lib){
         libDao.save(lib);
     }

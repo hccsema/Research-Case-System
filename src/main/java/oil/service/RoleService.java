@@ -27,7 +27,7 @@ public class RoleService {
         return roleDao.getFirstByRoleContaining(role);
     }
 
-    @CacheEvict(value = "RoleService_getRole")
+    @CacheEvict(value = "RoleService_getRole",allEntries=true)
     public void save(Role role){
         roleDao.save(role);
     }

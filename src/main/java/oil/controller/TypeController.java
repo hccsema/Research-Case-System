@@ -61,7 +61,8 @@ public class TypeController {
         type.setIsExist(true);
         type.setCases(byId.getCases());
         typeService.save(type);
-        InitListener.getApplicatonContext().getServletContext().setAttribute("types",typeService.findAll());
+        ArrayList<Type> all = typeService.findAll();
+        InitListener.getApplicatonContext().getServletContext().setAttribute("types",all);
         return findAll(model);
     }
 
