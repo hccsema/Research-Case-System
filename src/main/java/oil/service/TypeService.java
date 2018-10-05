@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-19  下午8:10.
@@ -29,4 +30,7 @@ public class TypeService {
         typeDao.save(type);
     }
 
+    public void saveAll(List<Type> types) {
+        typeDao.saveAll(types);
+    }
 }

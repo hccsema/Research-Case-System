@@ -1,17 +1,16 @@
 package oil.controller;
 
+import oil.listener.InitListener;
 import oil.model.Type;
 import oil.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-23  下午1:59.
@@ -33,7 +32,7 @@ public class TypeController {
     public String findAll(Model model){
         ArrayList<Type> all = typeService.findAll();
         model.addAttribute("types",all);
-        return "";
+        return "admin/typechange";
     }
 
     /**
@@ -44,7 +43,7 @@ public class TypeController {
     @PostMapping(value = "/add")
     public String addType(Type type){
         Assert.notNull(type,"未知参数");
-        type.setGrade(4);
+
         type.setIsExist(true);
         typeService.save(type);
         return "";
@@ -56,17 +55,21 @@ public class TypeController {
      * @return
      */
     @PostMapping(value = "/change")
-    public String changeType(Type type){
+    public String changeType(Type type,Model model){
         Assert.notNull(type,"未知参数");
+        type.setIsExist(true);
         typeService.save(type);
-        return "";
+        InitListener.getApplicatonContext().getServletContext().setAttribute("types",typeService.findAll());
+        return findAll(model);
     }
 
-    @PostMapping(value = "/remove")
-    public String remove(@RequestParam(name = "type") Type type){
+
+    @GetMapping(value = "/remove/{type}")
+    public String remove(@PathVariable(name = "type") Type type, Model model){
         type.setIsExist(false);
         typeService.save(type);
-        return "";
+        InitListener.getApplicatonContext().getServletContext().setAttribute("type",type);
+        return findAll(model);
     }
 
 }
