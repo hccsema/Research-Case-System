@@ -1,10 +1,12 @@
 package oil.controller;
 
+import oil.listener.InitListener;
 import oil.model.Case;
 import oil.model.Doc;
 import oil.model.Tag;
 import oil.model.Type;
 import oil.service.CaseService;
+import oil.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +32,8 @@ import java.util.List;
 public class CaseController {
     @Autowired
     private CaseService caseService;
+    @Autowired
+    private TagService tagService;
 
     /**
      * 通过id获取
@@ -133,6 +138,13 @@ public class CaseController {
     @GetMapping(value = "/recovery/{id}")
     public String recovery(@PathVariable(name = "id") Case c,Model model){
         c.setIsExist(true);
+        List<Tag> tags = c.getTags();
+        for (Tag tag:tags){
+            List<Case> cases = tag.getCases();
+            cases.add(c);
+            tag.setCases(cases);
+        }
+        tagService.saveAll(tags);
         caseService.save(c);
         return getAll(model);
     }
@@ -159,6 +171,13 @@ public class CaseController {
     @GetMapping(value = "/remove/{id}")
     public String removeCase(@PathVariable(name = "id",required = false) Case c,Model model){
         if (c!=null) {
+            List<Tag> tags = c.getTags();
+            for (Tag tag:tags){
+                List<Case> cases = tag.getCases();
+                cases.remove(c);
+                tag.setCases(cases);
+            }
+            tagService.saveAll(tags);
             c.setIsExist(false);
             caseService.save(c);
         }
@@ -172,8 +191,34 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/add.html")
-    public String addCase( Case c,Model model){
+    public String addCase( Case c,
+                           Model model,
+                           String[] tagss){
         Assert.notNull(c,"没有参数");
+        if (tagss!=null){
+            Case save = caseService.save(c);
+            for (String tags:tagss){
+                if (tags.isEmpty()||"".equals(tags)){
+                    continue;
+                }
+                Tag byName = tagService.findByName(tags);
+                if (byName==null){
+                    byName=new Tag();
+                    byName.setName(tags);
+                    byName.setIsExist(true);
+                    byName = tagService.save(byName);
+                    List<Tag> all = tagService.findAll();
+                    InitListener.getApplicatonContext().getServletContext().setAttribute("tags",all);
+                }
+                List<Case> cases = byName.getCases();
+                cases.add(save);
+                byName.setCases(cases);
+                tagService.save(byName);
+                List<Tag> tags1 = c.getTags();
+                tags1.add(byName);
+                c.setTags(tags1);
+            }
+        }
 
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHH");
 
@@ -183,6 +228,7 @@ public class CaseController {
         c.setLibId(simpleDateFormat.format(new Date()));
         System.out.println(c);
         caseService.save(c);
+
         model.addAttribute("msg","添加成功");
         return "admin/case_add";
     }
@@ -194,8 +240,34 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/change.html")
-    public String changeCase( Case c,Model model){
+    public String changeCase( Case c,String[] tagss,Model model){
         Assert.notNull(c,"没有参数");
+        List<Tag> tagslist = c.getTags();
+        tagslist.clear();
+
+        if (tagss!=null){
+            for (String tags:tagss){
+                if (tags.isEmpty()||"".equals(tags)){
+                    continue;
+                }
+                Tag byName = tagService.findByName(tags);
+                if (byName==null){
+                    byName=new Tag();
+                    byName.setName(tags);
+                    byName.setIsExist(true);
+                    byName = tagService.save(byName);
+                    List<Tag> all = tagService.findAll();
+                    InitListener.getApplicatonContext().getServletContext().setAttribute("tags",all);
+                }
+                List<Case> cases = byName.getCases();
+                cases.add(c);
+                byName.setCases(cases);
+                tagService.save(byName);
+                tagslist.add(byName);
+                c.setTags(tagslist);
+            }
+        }
+
 
         caseService.save(c);
         model.addAttribute("msg","变更成功");

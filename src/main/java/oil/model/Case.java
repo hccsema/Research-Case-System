@@ -64,7 +64,6 @@ public class Case implements Serializable {
                 ", course='" + course + '\'' +
                 ", author='" + author + '\'' +
                 ", unit='" + unit + '\'' +
-                ", tags=" + tags +
                 ", summary='" + summary + '\'' +
                 ", contents=" + contents +
                 ", solves=" + solves +

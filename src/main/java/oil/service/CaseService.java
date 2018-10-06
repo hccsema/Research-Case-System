@@ -81,8 +81,8 @@ public class CaseService {
                         "CaseService_getCountByDate",
                         "CaseService_getCasesByDate",
                         "CaseService_findTop10ByTypeAndIsExistOrderByTimes"})
-    public void save(Case cases){
-        caseDao.save(cases);
+    public Case save(Case cases){
+        return caseDao.save(cases);
     }
 
     @CacheEvict(value = {"CaseService_findAllByType",

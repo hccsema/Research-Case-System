@@ -73,6 +73,7 @@ public class DocController {
                 List<Doc> solves = caseId.getSolves();
                 solves.add(doc);
             }
+            doc.setACase(caseId);
             docService.save(doc);
         }
         caseService.save(caseId);

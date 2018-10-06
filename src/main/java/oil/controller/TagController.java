@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-21  上午11:13.
@@ -44,7 +45,7 @@ public class TagController {
 
     @GetMapping(value = "/")
     public String fandAll(Model model){
-        ArrayList<Tag> all = tagService.findAll();
+        List<Tag> all = tagService.findAll();
         model.addAttribute("tags",all);
         return "";
     }
