@@ -4,7 +4,9 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <style>
 
+    </style>
 </head>
 <body>
     <div th:fragment="top" style="margin-bottom: 30px">
@@ -17,14 +19,18 @@
                 <h3><b th:text="${#servletContext.getAttribute('lib').mainTitle}"></b></h3>
             </div>
             <div style="width: 7%;float: left;margin-top: 29px">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" th:if="${#request.getRemoteUser()==''||#request.getRemoteUser()==null}">
+                    <li class="dropdown">
+                        <a th:href="@{/login}" class="fa fa-user-circle fa-3x"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav" th:if="${#request.getRemoteUser()!=''&&#request.getRemoteUser()!=null}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0">
                             <i class="fa fa-user-circle fa-3x"></i>
                             <!--<b class="caret" style="margin-bottom: 35%;margin-left: 5px"></b>-->
                         </a>
                         <ul class="dropdown-menu" style="width: 20px">
-                            <li><a href="/login">登录</a></li>
                             <li><a href="/user/user_info">个人信息</a></li>
                             <li><a href="/user/pwd_change">修改密码</a></li>
                             <li><a th:href="@{/logout}">登出</a></li>
