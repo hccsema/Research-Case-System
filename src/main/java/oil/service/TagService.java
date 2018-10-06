@@ -21,15 +21,19 @@ public class TagService {
 
     @Cacheable(value = "TagService_findAll")
     public ArrayList<Tag> findAll(){
-        return tagDao.findAllByIsExistOrderByCases(true);
+        return tagDao.findTop10ByIsExistOrderByCases(true);
     }
 
     public ArrayList<Tag> search(String search){
         return tagDao.findAllByIsExistAndNameContaining(true,search);
     }
 
+    public Tag findByName(String name){
+        return tagDao.findByName(name);
+    }
+
     @CacheEvict(value = "TagService_findAll",allEntries=true)
-    public void save(Tag tag){
-        tagDao.save(tag);
+    public Tag save(Tag tag){
+        return tagDao.save(tag);
     }
 }

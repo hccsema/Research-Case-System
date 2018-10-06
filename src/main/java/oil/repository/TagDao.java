@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author waiter
  */
 public interface TagDao extends JpaRepository<Tag,Integer> {
-    ArrayList<Tag> findAllByIsExistOrderByCases(boolean b);
+    ArrayList<Tag> findTop10ByIsExistOrderByCases(boolean b);
     ArrayList<Tag> findAllByIsExistAndNameContaining(boolean b,String search);
+    Tag findByName(String name);
 }
