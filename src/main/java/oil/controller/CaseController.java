@@ -119,13 +119,10 @@ public class CaseController {
      * @param model
      * @return
      */
-    @GetMapping(value = {"/recovery/{page}","/recovery"})
-    public String getRecovery(Model model,@PathVariable(name = "page",required = false) Integer page){
-        if (page==null){
-            page=0;
-        }
-        model.addAttribute("cases",caseService.recovery(page));
-        return "";
+    @GetMapping(value = {"/recovery"})
+    public String getRecovery(Model model){
+        model.addAttribute("cases",caseService.findAllByIsExist(false));
+        return "admin/recycleBin";
     }
 
     /**
@@ -133,11 +130,11 @@ public class CaseController {
      * @param c
      * @return
      */
-    @PostMapping(value = "/recovery/{case}")
-    public String recovery(@PathVariable(name = "case") Case c){
+    @GetMapping(value = "/recovery/{id}")
+    public String recovery(@PathVariable(name = "id") Case c,Model model){
         c.setIsExist(true);
         caseService.save(c);
-        return "";
+        return getAll(model);
     }
     /**
      * 彻底删除案例
@@ -145,12 +142,12 @@ public class CaseController {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = "/delete.html")
-    public String deleteCase(@RequestParam(name = "case",required = false) Case c){
+    @GetMapping(value = "/delete/{id}")
+    public String deleteCase(@PathVariable(name = "id") Case c,Model model){
         if (c!=null) {
             caseService.delete(c);
         }
-        return "";
+        return getAll(model);
     }
 
     /**
@@ -159,13 +156,13 @@ public class CaseController {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    @PostMapping(value = "/remove.html")
-    public String removeCase(@RequestParam(name = "case",required = false) Case c){
+    @GetMapping(value = "/remove/{id}")
+    public String removeCase(@PathVariable(name = "id",required = false) Case c,Model model){
         if (c!=null) {
             c.setIsExist(false);
             caseService.save(c);
         }
-        return "";
+        return getRecovery(model);
     }
 
     /**
@@ -175,7 +172,7 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/add.html")
-    public String addCase( Case c){
+    public String addCase( Case c,Model model){
         Assert.notNull(c,"没有参数");
 
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyyMMddHH");
@@ -186,7 +183,8 @@ public class CaseController {
         c.setLibId(simpleDateFormat.format(new Date()));
         System.out.println(c);
         caseService.save(c);
-        return "";
+        model.addAttribute("msg","添加成功");
+        return "admin/case_add";
     }
 
     /**
@@ -196,11 +194,12 @@ public class CaseController {
      */
     @Transactional(rollbackFor = Exception.class)
     @PostMapping(value = "/change.html")
-    public String changeCase( Case c){
+    public String changeCase( Case c,Model model){
         Assert.notNull(c,"没有参数");
 
         caseService.save(c);
-        return "";
+        model.addAttribute("msg","变更成功");
+        return "admin/case_change";
     }
 
     @RolesAllowed("ROLE_ADMIN")
@@ -208,7 +207,12 @@ public class CaseController {
     public String getAll(Model model){
         List<Case> allByIsExist = caseService.findAllByIsExist(true);
         model.addAttribute("cases",allByIsExist);
-        return "";
+        return "admin/case_all";
     }
 
+    @GetMapping(value = "/get/{id}/case_info.html")
+    public String findCaseById(@PathVariable(name = "id")Case c, Model model){
+        model.addAttribute("case",c);
+        return "admin/case_change";
+    }
 }

@@ -73,6 +73,7 @@ public class UserController {
     @PostMapping(value = "/change")
     public String changeUser(User user, Model model){
         User byId = userDetailsService.findById(user.getId());
+        user.setAuthorities((List<Role>) byId.getAuthorities());
         user.setPassWord(byId.getPassword());
         user.setNonLocked(true);
         user.setNonExpired(true);
@@ -93,6 +94,7 @@ public class UserController {
     public String changeUserByAdmin(User user, Model model){
         User byId = userDetailsService.findById(user.getId());
         user.setPassWord(byId.getPassword());
+        user.setAuthorities((List<Role>) byId.getAuthorities());
         user.setNonLocked(true);
         user.setNonExpired(true);
         userDetailsService.save(user);
@@ -154,14 +156,14 @@ public class UserController {
      * @param model
      * @return
      */
-    @GetMapping(value = {"/get/{page}","/get"})
-    public String getAll(Model model,@PathVariable(name = "page",required = false) Integer page){
-        if (page==null){
-            page=0;
-        }
-        model.addAttribute("users",userDetailsService.findAll(page));
+    @GetMapping(value = {"/get"})
+    public String getAll(Model model){
+        Iterable<User> all = userDetailsService.findAll();
+        model.addAttribute("users",all);
         return "admin/userControl";
     }
+
+
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping(value = "/get/{id}/info")
     public String getUser(@PathVariable(name = "id") User user,Model model){
@@ -175,25 +177,13 @@ public class UserController {
      * @return
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PostMapping(value = "/lock")
-    public String lock(@RequestParam(name = "id") User user) {
-        user.setNonLocked(false);
+    @GetMapping(value = "/lock/{id}")
+    public String lock(@PathVariable(name = "id") User user,Model model) {
+        user.setNonExpired(!user.getNonExpired());
         userDetailsService.save(user);
-        return "";
+        return getAll(model);
     }
 
-    /**
-     * 解锁
-     * @param user
-     * @return
-     */
-    @RolesAllowed("ROLE_ADMIN")
-    @PostMapping(value = "/unLock")
-    public String unLock(@RequestParam(name = "id") User user) {
-        user.setNonLocked(true);
-        userDetailsService.save(user);
-        return "";
-    }
 
 
     /**
@@ -202,10 +192,10 @@ public class UserController {
      * @return
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam(name = "id") User user) {
+    @GetMapping(value = "/delete/{id}")
+    public String delete(@PathVariable(name = "id") User user,Model model) {
         userDetailsService.delete(user);
-        return "";
+        return getAll(model);
     }
 
     /**

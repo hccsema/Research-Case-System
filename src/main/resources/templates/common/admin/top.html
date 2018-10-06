@@ -16,7 +16,7 @@
             </div>
             <div style="top:10px;width: 100px;float: right;margin-right: 20px;margin-top: 15px">
                 <h4>您好,<span>Admin</span></h4>
-                <h5><a th:href="@{/admin/pwd_change}">修改密码</a> , <a href="/login">退出</a> </h5>
+                <h5><a th:href="@{/admin/pwd_change}">修改密码</a> , <a href="/logout">退出</a> </h5>
             </div>
         </div>
 
@@ -54,11 +54,11 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu" style="background: #337AB7">
-                        <li class="active"><a th:href="@{/admin/projectCon}">案例添加</a></li>
-                        <li class="active"><a th:href="@{/admin/projectCon}">案例变更</a></li>
+                        <li class="active"><a th:href="@{/case/get}">全部案例</a></li>
+                        <li class="active"><a th:href="@{/admin/case_add}">添加案例</a></li>
                     </ul>
                 </li>
-                <li class="active"><a th:href="@{/admin/recycleBin}">回收站</a></li>
+                <li class="active"><a th:href="@{/case/recovery}">回收站</a></li>
             </ul>
         </div>
     </div>

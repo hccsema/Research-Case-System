@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>案例变更</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script th:src="@{/script/jquery.min.js}"></script>
+    <script th:src="@{/script/bootstrap.min.js}"></script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+    <!--&lt;!&ndash; jQuery &ndash;&gt;-->
+    <!--<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+    <link th:href="@{/css/back-stage.css}" rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="/common/admin/top::top"></div>
+<div class="container">
+
+    <div class="row">
+        <div class="page-header">
+            <h4>案例变更</h4>
+            <h4 th:text="${msg}" style="color: red"></h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-6">
+            <form role="form" th:action="@{/case/change.html}" method="post">
+                    <input class="form-control" name="id" type="hidden" th:value="${case.id}">
+                    <div class="form-group">
+                        <label>案例名称</label>
+                        <input class="form-control" name="name" th:value="${case.name}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="disabledSelect-sex" >案例类型（项目所属）</label>
+                        <select id="disabledSelect-sex" class="form-control" name="type">
+                            <option th:each="t:${#servletContext.getAttribute('types')}" th:value="${t.id}" th:text="${t.name}" th:selected="${t.id==case.type.id}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>作者</label>
+                        <input class="form-control" name="author" th:value="${case.author}">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>专业学位类别</label>
+                        <input class="form-control" name="field" th:value="${case.field}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>实用课程</label>
+                        <input class="form-control" name="course" th:value="${case.course}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>专业领域/方向</label>
+                        <input class="form-control" name="direction" th:value="${case.direction}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>单位</label>
+                        <input class="form-control" name="unit" th:value="${case.unit}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>标签</label>
+                        <input class="form-control" name="tags" th:value="null">
+                    </div>
+
+                    <input class="form-control" name="isExist" type="hidden"  th:value="true">
+
+                    <div class="form-group">
+                        <label>案例摘要</label>
+                        <textarea class="form-control" row="3" name="summary"  th:value="${case.summary}"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" >变更</button>
+
+            </form>
+                <a th:href="@{/case/remove/}+${case.id}">
+                    <button type="submit" class="btn btn-primary"  onclick="Dalart()">删除</button>
+                </a>
+
+
+        </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    function Dalart(){
+        if (confirm("你确定删除此案例吗？")) {
+            alert("此案例将放入回收站");
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
