@@ -5,6 +5,7 @@ import oil.repository.TagDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class TagService {
 
     @Cacheable(value = "TagService_findAll")
     public ArrayList<Tag> findAll(){
-        return tagDao.findTop10ByIsExistOrderByCases(true);
+        return tagDao.findTop10ByIsExist(true, Sort.by(Sort.Direction.DESC,"cases"));
     }
 
     public ArrayList<Tag> search(String search){

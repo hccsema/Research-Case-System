@@ -1,6 +1,7 @@
 package oil.repository;
 
 import oil.model.Tag;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * @author waiter
  */
 public interface TagDao extends JpaRepository<Tag,Integer> {
-    ArrayList<Tag> findTop10ByIsExistOrderByCases(boolean b);
+    ArrayList<Tag> findTop10ByIsExist(boolean b, Sort sort);
     ArrayList<Tag> findAllByIsExistAndNameContaining(boolean b,String search);
     Tag findByName(String name);
 }
