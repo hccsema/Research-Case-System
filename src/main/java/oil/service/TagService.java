@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,8 +23,18 @@ public class TagService {
     private TagDao tagDao;
 
     @Cacheable(value = "TagService_findAll")
-    public ArrayList<Tag> findAll(){
-        return tagDao.findTop10ByIsExist(true, Sort.by(Sort.Direction.DESC,"cases"));
+    public List<Tag> findAll(){
+        ArrayList<Tag> cases = tagDao.findAllByIsExist(true, Sort.by(Sort.Direction.DESC, "cases"));
+        cases.sort(new Comparator<Tag>() {
+            @Override
+            public int compare(Tag o1, Tag o2) {
+                return o1.getCases().size()>o2.getCases().size()?-1:0;
+            }
+        });
+        if (cases.size()<11){
+            return cases;
+        }
+        return cases.subList(0,10);
     }
 
     public ArrayList<Tag> search(String search){

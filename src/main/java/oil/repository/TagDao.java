@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author waiter
  */
 public interface TagDao extends JpaRepository<Tag,Integer> {
-    ArrayList<Tag> findTop10ByIsExist(boolean b, Sort sort);
+    ArrayList<Tag> findAllByIsExist(boolean b, Sort sort);
     ArrayList<Tag> findAllByIsExistAndNameContaining(boolean b,String search);
     Tag findByName(String name);
 }

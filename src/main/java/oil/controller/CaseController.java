@@ -207,7 +207,7 @@ public class CaseController {
                     byName.setName(tags);
                     byName.setIsExist(true);
                     byName = tagService.save(byName);
-                    ArrayList<Tag> all = tagService.findAll();
+                    List<Tag> all = tagService.findAll();
                     InitListener.getApplicatonContext().getServletContext().setAttribute("tags",all);
                 }
                 List<Case> cases = byName.getCases();
@@ -256,7 +256,7 @@ public class CaseController {
                     byName.setName(tags);
                     byName.setIsExist(true);
                     byName = tagService.save(byName);
-                    ArrayList<Tag> all = tagService.findAll();
+                    List<Tag> all = tagService.findAll();
                     InitListener.getApplicatonContext().getServletContext().setAttribute("tags",all);
                 }
                 List<Case> cases = byName.getCases();

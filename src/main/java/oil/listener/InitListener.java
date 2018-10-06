@@ -17,6 +17,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -84,7 +86,8 @@ public class InitListener implements ServletContextListener {
 
     private void initTag(ServletContextEvent sce) {
         TagService bean = applicationContext.getBean(TagService.class);
-        ArrayList<Tag> all = bean.findAll();
+        List<Tag> all = bean.findAll();
+
         sce.getServletContext().setAttribute("tags",all);
     }
 
