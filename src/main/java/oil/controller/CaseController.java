@@ -7,6 +7,7 @@ import oil.model.Tag;
 import oil.model.Type;
 import oil.service.CaseService;
 import oil.service.TagService;
+import oil.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class CaseController {
     private CaseService caseService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private TypeService typeService;
 
     /**
      * 通过id获取
@@ -227,6 +230,13 @@ public class CaseController {
         c.setTimes(0L);
         c.setLibId(simpleDateFormat.format(new Date()));
         System.out.println(c);
+
+        Type type = c.getType();
+        List<Case> cases = type.getCases();
+        cases.add(c);
+        type.setCases(cases);
+        typeService.save(type);
+        c.setType(type);
         caseService.save(c);
 
         model.addAttribute("msg","添加成功");
@@ -267,6 +277,7 @@ public class CaseController {
                 c.setTags(tagslist);
             }
         }
+
 
 
         caseService.save(c);
