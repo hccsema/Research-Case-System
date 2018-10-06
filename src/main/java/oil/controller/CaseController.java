@@ -138,6 +138,13 @@ public class CaseController {
     @GetMapping(value = "/recovery/{id}")
     public String recovery(@PathVariable(name = "id") Case c,Model model){
         c.setIsExist(true);
+        List<Tag> tags = c.getTags();
+        for (Tag tag:tags){
+            List<Case> cases = tag.getCases();
+            cases.add(c);
+            tag.setCases(cases);
+        }
+        tagService.saveAll(tags);
         caseService.save(c);
         return getAll(model);
     }
@@ -164,6 +171,13 @@ public class CaseController {
     @GetMapping(value = "/remove/{id}")
     public String removeCase(@PathVariable(name = "id",required = false) Case c,Model model){
         if (c!=null) {
+            List<Tag> tags = c.getTags();
+            for (Tag tag:tags){
+                List<Case> cases = tag.getCases();
+                cases.remove(c);
+                tag.setCases(cases);
+            }
+            tagService.saveAll(tags);
             c.setIsExist(false);
             caseService.save(c);
         }

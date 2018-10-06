@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by  waiter on 18-9-20  下午1:53.
@@ -36,5 +37,9 @@ public class TagService {
     @CacheEvict(value = "TagService_findAll",allEntries=true)
     public Tag save(Tag tag){
         return tagDao.save(tag);
+    }
+
+    public void saveAll(List<Tag> tags) {
+        tagDao.saveAll(tags);
     }
 }
