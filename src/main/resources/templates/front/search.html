@@ -21,6 +21,12 @@
             color: white;
         }
     </style>
+    <script>
+        function f() {
+            var av = document.getElementById("myI").value;
+            window.location.href="/search/"+av;
+        }
+    </script>
 </head>
 <body>
 <div th:replace="/common/top::top"></div>

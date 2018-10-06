@@ -7,7 +7,15 @@
 <body>
     <div style="width: 22%;height: auto;float: left;margin: 0.5%;" th:fragment="right">
 
-        <div class="well well-sm" style="border: none;height: 900px">
+        <div style="width: 99%;margin-left: 0.5%;margin-right: 0.5%">
+            <from th:id="myF" class="input-group" style="width: 100%;float: left">
+                <input id="myI" type="text" class="form-control" placeholder="请输入文档名"/>
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="f()"><i class="fa fa-search"></i></button>
+                    </span>
+            </from>
+        </div>
+        <div class="well well-sm" style="border: none;height: 900px;margin-top: 50px">
             <div style="float: left;width: 5%;height: 15px;margin-top: 11px;background: #911a0a"></div>
             <div class="panel-heading" style="width: 95%;float: left">
                 <h3 class="panel-title">案例库简介</h3>
