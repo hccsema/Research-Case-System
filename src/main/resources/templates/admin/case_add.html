@@ -25,14 +25,20 @@
     <script>
         $(document).ready(function(){
             $("#button100").click(function(){
-                $("#button100").after("<div>" +
-                    "<div style='margin-top: 20px;float: left'>" +
-                    "<input class='form-control' value='请输入标签名称' name='tags' style='width: 55%;float: left;margin-top: 5px' onfocus=\"javascript:if(this.value=='请输入标签名称')this.value='';\">" +
-                    "<a style='float: left;margin-left: 10px;color: #A80000;font-size: xx-large' href='#'>×</a>" +
+                $("#a").after("<div>" +
+                    "<div style='margin-top: 20px;float: left' id='div1'>" +
+                    "<input class='form-control' value='请输入标签名称' name='tags' style='width: 75%;float: left;margin-top: 5px' onfocus=\"javascript:if(this.value=='请输入标签名称')this.value='';\">" +
                     "</div>" +
                     "</div>");
             });
+            $("#a").click(function(){
+                $("#div1").remove("#div1");
+            });
         });
+
+        function jump() {
+
+        }
     </script>
 
 </head>
@@ -103,6 +109,7 @@
                     <button type="button" id="button100" class="btn btn-default">
                         <b>+</b>
                     </button>
+                    <a href='javascript:;' onclick="jump()" id='a' style='margin-left: 10px;color: #A80000'>删除最后一个标签</a>
                 </div>
             </div>
         </form>
