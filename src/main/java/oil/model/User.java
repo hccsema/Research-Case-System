@@ -48,7 +48,7 @@ public class User implements UserDetails , Serializable {
     /**
      * 权限列表
      */
-    @ManyToMany(targetEntity = Role.class,cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Role.class,fetch = FetchType.EAGER)
     private List<Role> authorities ;
 
     @Override

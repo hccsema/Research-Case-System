@@ -25,7 +25,7 @@
 <div th:replace="/common/admin/top::top"></div>
 <div class="container">
     <div class="page-header" >
-        <h4>全部用户信息</h4>
+        <h4>全部案例 点击案例可对案例进行修改</h4>
     </div>
 
 
@@ -44,14 +44,14 @@
             <tbody >
             <tr th:each="m:${cases}">
                 <td >
-                    <a th:href="@{$'/case/'+${m.id}+'/case_info.html'}" th:text="${m.id}">
+                    <a th:href="@{/case/get/}+${m.id}+@{/case_info.html}" th:text="${m.id}">
                     </a>
                 </td>
                 <td th:text="${m.name}"></td>
                 <td th:text="${m.author}"></td>
-                <td th:text="${m.type}"></td>
-                <td th:text="#{m.tags}"></td>
-                <td th:text="#{m.date}"></td>
+                <td th:text="${m.type.name}"></td>
+                <td th:text="${m.tags}"></td>
+                <td th:text="${m.date}"></td>
             </tr>
             </tbody>
         </table>

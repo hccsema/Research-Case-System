@@ -40,6 +40,9 @@
                     <th>性别</th>
                     <th>邮箱</th>
                     <th>权级</th>
+                    <th>状态</th>
+                    <th>冻结/解冻</th>
+                    <th>删除</th>
                  </tr>
                 </thead>
                 <tbody >
@@ -51,7 +54,22 @@
                         <td th:text="${m.getUsername()}"></td>
                         <td th:text="${m.sex}"></td>
                         <td th:text="${m.email}"></td>
-                        <td th:text="#{m.authorities}"></td>
+                        <td th:text="(${m.authorities.get(0).getId()}==1)?'管理员':'普通用户'"></td>
+                        <td th:text="(${m.nonExpired}== true)?'使用':'冻结'"></td>
+                        <td>
+                            <a th:href="@{/user/lock/}+${m.id}">
+                                <button type="button" class="btn btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/user/delete/}+${m.id}">
+                                <button type="button" class="btn btn-default" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

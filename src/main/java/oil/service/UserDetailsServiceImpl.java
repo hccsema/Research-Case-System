@@ -59,9 +59,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userDao.saveAll(list);
     }
 
-    public Page<User> findAll(Integer page){
-        PageRequest id = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("id")));
-        return userDao.findAll(id);
+    public Iterable<User> findAll(){
+        return userDao.findAll();
     }
 
     public void delete(User user){
