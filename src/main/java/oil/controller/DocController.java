@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -47,10 +50,11 @@ public class DocController {
      * @return
      * @throws IOException
      */
-    @ResponseBody
     @Transactional(rollbackFor = Exception.class)
     @RequestMapping(value = "/uploads/{caseId}/{type}")
-    public Object uploads(@RequestParam("files")MultipartFile[] files, @PathVariable() Case caseId, @PathVariable() Integer type) throws IOException {
+    public String uploads(@RequestParam("files")MultipartFile[] files,
+                        @PathVariable() Case caseId,
+                        @PathVariable() Integer type) throws IOException {
         Assert.notEmpty(files,"没有要上传的文件");
         Assert.notNull(type,"没有选择上传的文件类别");
 
@@ -77,7 +81,7 @@ public class DocController {
             docService.save(doc);
         }
         caseService.save(caseId);
-        return null;
+        return "redirect:"+"/case/get/"+caseId.getId()+"/case_info.html";
     }
 
 
@@ -92,7 +96,7 @@ public class DocController {
         System.out.println(s);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", String.format("attachment; fileName="+  s +";filename*=utf-8''"+ URLEncoder.encode(s,"UTF-8")));
+        headers.add("Content-Disposition", "attachment; fileName="+  s +";filename*=utf-8''"+ URLEncoder.encode(s,"UTF-8"));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
         doc.setDownCount(doc.getDownCount()+1);

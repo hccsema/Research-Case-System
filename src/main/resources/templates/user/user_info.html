@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>用户管理</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -59,7 +59,7 @@
 
                 <div class="form-group">
                     <label>权级</label>
-                    <input class="form-control" name="#" disabled="disabled" th:value="${#request.getSession().getAttribute('userinfo').authorities}">
+                    <input class="form-control" name="#" disabled="disabled" th:value="${(#request.getSession().getAttribute('userinfo').authorities.get(0).getId() == 1)?'管理员':'普通用户'}">
                     <input class="form-control" name="authorities " type="hidden"  th:value="${#request.getSession().getAttribute('userinfo').authorities}">
                 </div>
 
@@ -74,9 +74,9 @@
 
                 <div class="form-group">
                     <label for="disabledSelect-sex">性别</label>
-                    <select id="disabledSelect-sex" class="form-control" name="sex" th:value="${#request.getSession().getAttribute('userinfo').sex}">
-                        <option value="男">男</option>
-                        <option value="女">女</option>
+                    <select id="disabledSelect-sex" class="form-control" name="sex" >
+                        <option value="男" th:selected="${#request.getSession().getAttribute('userinfo').sex}=='男'">男</option>
+                        <option value="女"  th:selected="${#request.getSession().getAttribute('userinfo').sex    }=='女'">女</option>
                     </select>
                 </div>
 
