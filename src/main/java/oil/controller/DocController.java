@@ -118,10 +118,13 @@ public class DocController {
     }
 
 
-    @PostMapping(value = "/remove/{case}")
-    public String remove(@RequestParam(value = "id")Doc doc,@PathVariable(value = "case")Case c){
+    @PostMapping(value = "/remove")
+    public String remove(@RequestParam(value = "id")Doc doc){
         Assert.notNull(doc,"文件不存在");
+        Long id = doc.getACase().getId();
+        File file = new File(basePath + doc.getPath());
+        file.delete();
         docService.remove(doc);
-        return "redirect:"+"/case/get/"+c.getId()+"/case_info.html";
+        return "redirect:"+"/case/get/"+id+"/case_info.html";
     }
 }
