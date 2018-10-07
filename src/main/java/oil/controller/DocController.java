@@ -121,10 +121,17 @@ public class DocController {
     @PostMapping(value = "/remove")
     public String remove(@RequestParam(value = "id")Doc doc){
         Assert.notNull(doc,"文件不存在");
-        Long id = doc.getACase().getId();
+        Case aCase = doc.getACase();
         File file = new File(basePath + doc.getPath());
         file.delete();
+        List<Doc> solves = aCase.getSolves();
+        List<Doc> contents = aCase.getContents();
+        solves.remove(doc);
+        contents.remove(doc);
+        aCase.setContents(contents);
+        aCase.setSolves(solves);
+        caseService.save(aCase);
         docService.remove(doc);
-        return "redirect:"+"/case/get/"+id+"/case_info.html";
+        return "redirect:"+"/case/get/"+aCase.getId()+"/case_info.html";
     }
 }
