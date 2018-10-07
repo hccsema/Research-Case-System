@@ -28,6 +28,10 @@ public class DocService {
         return docDao.findAllByNameContainingOrPathContaining(search,search);
     }
 
+    @CacheEvict(value = "DocService_findById",allEntries=true)
+    public void remove(Doc doc){
+        docDao.delete(doc);
+    }
 
     @Cacheable(value = "DocService_findById")
     public Doc findById(Long id){

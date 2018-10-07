@@ -116,4 +116,12 @@ public class DocController {
              file.mkdir();
          }
     }
+
+
+    @PostMapping(value = "/remove/{case}")
+    public String remove(@RequestParam(value = "id")Doc doc,@PathVariable(value = "case")Case c){
+        Assert.notNull(doc,"文件不存在");
+        docService.remove(doc);
+        return "redirect:"+"/case/get/"+c.getId()+"/case_info.html";
+    }
 }
