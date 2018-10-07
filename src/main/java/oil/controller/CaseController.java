@@ -278,7 +278,9 @@ public class CaseController {
             }
         }
 
-
+        Case byId = caseService.findById(c.getId());
+        c.setContents(byId.getContents());
+        c.setSolves(byId.getSolves());
 
         caseService.save(c);
         model.addAttribute("msg","变更成功");
