@@ -48,7 +48,7 @@
                     <a class="top" th:text="${m.name}" th:href="@{'/case/'+${m.id}+'/type.html'}"></a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="top" th:href="@{/admin/index}">后台管理</a>
+                    <a class="top" th:href="@{/case/get}">后台管理</a>
                 </li>
             </ul>
         </nav>

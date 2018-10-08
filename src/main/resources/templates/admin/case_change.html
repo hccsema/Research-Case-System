@@ -18,6 +18,26 @@
     <script th:src="@{/script/webuploader.custom.js}"></script>
 
 
+    <script>
+        $(document).ready(function(){
+            $("#button100").click(function(){
+                $("#a").after("<div>" +
+                    "<div style='margin-top: 20px;float: left' id='div1'>" +
+                    "<input class='form-control' value='请输入标签名称' name='tagss' style='width: 75%;float: left;margin-top: 5px' onfocus=\"javascript:if(this.value=='请输入标签名称')this.value='';\">" +
+                    "</div>" +
+                    "</div>");
+            });
+            $("#a").click(function(){
+                $("#div1").remove("#div1");
+            });
+        });
+
+        function jump() {
+
+        }
+    </script>
+
+
 
 </head>
 <body>
@@ -71,11 +91,6 @@
                         <input class="form-control" name="unit" th:value="${case.unit}">
                     </div>
 
-                    <div class="form-group">
-                        <label>标签</label>
-                        <input class="form-control" name="tags" th:value="null">
-                    </div>
-
                     <input class="form-control" name="isExist" type="hidden"  th:value="true">
 
                     <div class="form-group">
@@ -96,10 +111,18 @@
 
                 <form method="post" enctype="multipart/form-data" th:action="@{/doc/uploads/}+${case.id}+'/1'">
                     <div class="form-group">
-                        <label>案例内容文件:</label>
+                        <div class="page-header">
+                            <h5>内容文件:</h5>
+                            <h5 th:text="${msg}" style="color: red"></h5>
+                        </div>
                         <div class="panel-body" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
                             <a th:each="c:${case.contents}">
-                                <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a><br/>
+                                <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a>
+                                <a th:href="@{/doc/remove/}+${c.id}">
+                                    <button type="button" class="btn btn-default btn-xs">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                                    </button>
+                                </a><br/>
                             </a>
                         </div>
                     </div>
@@ -111,10 +134,18 @@
 
                 <form method="post" enctype="multipart/form-data" th:action="@{/doc/uploads/}+${case.id}+'/0'">
                     <div class="form-group">
-                        <label>案例解决方案:</label>
+                        <div class="page-header">
+                            <h5>解决方案:</h5>
+                            <h5 th:text="${msg}" style="color: red"></h5>
+                        </div>
                         <div class="panel-body" style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
                             <a th:each="c:${case.solves}">
-                                <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a><br/>
+                                <a th:text="${c.name}" th:href="@{'/doc/download/'+${c.id}}"></a>
+                                <a th:href="@{/doc/remove/}+${c.id}">
+                                    <button type="button" class="btn btn-default btn-xs" >
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                                    </button>
+                                </a><br/>
                             </a>
                         </div>
                     </div>
