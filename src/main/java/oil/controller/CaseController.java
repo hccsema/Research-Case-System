@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -251,8 +252,7 @@ public class CaseController {
     @PostMapping(value = "/change.html")
     public String changeCase( Case c,String[] tagss,Model model){
         Assert.notNull(c,"没有参数");
-        List<Tag> tagslist = c.getTags();
-        tagslist.clear();
+        List<Tag> tagslist = new ArrayList<>();
 
         if (tagss!=null){
             for (String tags:tagss){
