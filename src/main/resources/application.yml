@@ -68,7 +68,7 @@ spring:
       value: sf
 
 doc:
-  path: C:\Users\86558\Desktop\Hc
+  path: /home/waiter/Desktop/hhhh
 
 
 logging:
