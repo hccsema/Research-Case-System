@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -281,7 +280,7 @@ public class CaseController {
         Case byId = caseService.findById(c.getId());
         c.setContents(byId.getContents());
         c.setSolves(byId.getSolves());
-
+        c.setTimes(byId.getTimes());
         caseService.save(c);
         model.addAttribute("msg","变更成功");
         return "admin/case_change";
