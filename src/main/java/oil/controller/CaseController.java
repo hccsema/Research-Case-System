@@ -282,6 +282,7 @@ public class CaseController {
         c.setSolves(byId.getSolves());
         c.setTimes(byId.getTimes());
         c.setLibId(byId.getLibId());
+        c.setDate(byId.getDate());
         caseService.save(c);
         model.addAttribute("msg","变更成功");
         return "admin/case_change";
