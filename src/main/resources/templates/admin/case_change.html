@@ -22,7 +22,7 @@
         $(document).ready(function(){
             $("#button100").click(function(){
                 $("#a").after("<div>" +
-                    "<div style='margin-top: 20px;float: left' id='div1'>" +
+                    "<div style='margin-top: 20px;float: left' id='div1' class='form-group'>" +
                     "<input class='form-control' value='请输入标签名称' name='tagss' style='width: 75%;float: left;margin-top: 5px' onfocus=\"javascript:if(this.value=='请输入标签名称')this.value='';\">" +
                     "</div>" +
                     "</div>");
@@ -53,6 +53,12 @@
             <div class="col-lg-6">
             <form role="form" th:action="@{/case/change.html}" method="post">
                     <input class="form-control" name="id" type="hidden" th:value="${case.id}">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" >确定变更</button>
+                        <a th:href="@{/case/remove/}+${case.id}">
+                            <button type="button" class="btn btn-primary"  onclick="Dalart()">删除案例</button>
+                        </a>
+                    </div>
                     <div class="form-group">
                         <label>案例名称</label>
                         <input class="form-control" name="name" th:value="${case.name}">
@@ -109,18 +115,11 @@
                         </button>
                         <a id="a" style="color: red" href="javascript:;" onclick="jump()">点击删除最后一个标签</a>
                         <div>
-                            <div style='margin-top: 20px;float: left' id='div1' th:each="t:${case.tags}">
+                            <div class="form-group" style='margin-top: 20px;float: left' id='div1' th:each="t:${case.tags}">
                                 <input class='form-control' value='请输入标签名称' name='tagss' th:value="${t.name}" style='width: 75%;float: left;margin-top: 5px' >
                             </div>
                         </div>
-
                     </div>
-
-                    <button type="submit" class="btn btn-primary" >变更</button>
-                <a th:href="@{/case/remove/}+${case.id}">
-                    <button type="button" class="btn btn-primary"  onclick="Dalart()">删除</button>
-                </a>
-
             </form>
 
 
