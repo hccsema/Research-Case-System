@@ -43,8 +43,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin","/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/user").hasAuthority("ROLE_USER")
+                .antMatchers("/admin","/admin/**","/admin/*",
+                        "/type","/type/**","/type/*",
+                        "/tag","/tag/**","/tag/*",
+                        "/lib","/lib/**","/lib/*",
+                        "/doc/uploads/*","/doc/uploads/**",
+                        "/doc//remove/*",
+                        "/case/recovery/*","/case/recovery/*","/case/delete/*",
+                        "/case/remove/*","/case/add.html","/case/change.html",
+                        "/get","/get/**",
+                        "/user/add","/user/change2","/user/change_pwd/*").access("hasRole('ADMIN')")
+                .antMatchers("/user","/doc/download/*").hasAuthority("ROLE_USER")
                 .antMatchers("/","/add/user").permitAll()
                 .antMatchers("/static/**", "/static/*").permitAll()
                 .antMatchers("/font/**", "/css/*", "/images/*", "/js/*","/Wopop_files/*").permitAll()
