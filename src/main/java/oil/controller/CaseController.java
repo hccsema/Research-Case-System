@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -234,10 +235,10 @@ public class CaseController {
         List<Case> cases = type.getCases();
         cases.add(c);
         type.setCases(cases);
-        typeService.save(type);
+
         c.setType(type);
         caseService.save(c);
-
+        typeService.save(type);
         model.addAttribute("msg","添加成功");
         return "admin/case_add";
     }
@@ -251,8 +252,7 @@ public class CaseController {
     @PostMapping(value = "/change.html")
     public String changeCase( Case c,String[] tagss,Model model){
         Assert.notNull(c,"没有参数");
-        List<Tag> tagslist = c.getTags();
-        tagslist.clear();
+        List<Tag> tagslist = new ArrayList<>();
 
         if (tagss!=null){
             for (String tags:tagss){

@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/case/remove/*","/case/add.html","/case/change.html",
                         "/get","/get/**",
                         "/user/add","/user/change2","/user/change_pwd/*").access("hasRole('ADMIN')")
-                .antMatchers("/user","/doc/download/*").hasAuthority("ROLE_USER")
+                .antMatchers("/user").hasAuthority("ROLE_USER")
                 .antMatchers("/","/add/user").permitAll()
                 .antMatchers("/static/**", "/static/*").permitAll()
                 .antMatchers("/font/**", "/css/*", "/images/*", "/js/*","/Wopop_files/*").permitAll()
