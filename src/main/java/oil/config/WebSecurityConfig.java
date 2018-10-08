@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").hasAuthority("ROLE_USER")
                 .antMatchers("/","/add/user").permitAll()
                 .antMatchers("/static/**", "/static/*").permitAll()
-                .antMatchers("/font/**", "/css/*", "/images/*", "/js/*","/Wopop_files/*").permitAll()
+                .antMatchers("/script/*","/font/**", "/css/*", "/images/*", "/js/*","/Wopop_files/*").permitAll()
                 .antMatchers("/case/**/case_info.html","/case/**/date.html","/case/**/tag.html","/case/**/type.html").permitAll()
                 .antMatchers("/case/**","/file/uploads/**","/search/*").permitAll()
                 .anyRequest().authenticated()
