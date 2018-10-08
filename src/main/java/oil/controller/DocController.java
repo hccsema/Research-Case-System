@@ -60,7 +60,7 @@ public class DocController {
 
         for (MultipartFile multipartFile:files){
             Doc doc = new Doc();
-            doc.setPath("/"+caseId.getType().getName()+"/"+caseId.getName()+"/"+multipartFile.getOriginalFilename());
+            doc.setPath("/"+caseId.getType().getName()+"/"+caseId.getName()+caseId.getId()+"/"+multipartFile.getOriginalFilename());
             doc.setName(multipartFile.getOriginalFilename());
             doc.setUploadDate(new Date());
             doc.setDownCount(0L);
