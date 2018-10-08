@@ -37,14 +37,14 @@
                 <th>案例名称</th>
                 <th>作者</th>
                 <th>类型</th>
-                <th>关键词</th>
+                <th>标签</th>
                 <th>日期</th>
             </tr>
             </thead>
             <tbody >
             <tr th:each="m:${cases}">
                 <td >
-                    <a th:href="@{/case/get/}+${m.id}+@{/case_info.html}" th:text="${m.id}">
+                    <a th:href="@{/case/get/}+${m.id}+@{/case_info.html}" th:text="${m.libId}">
                     </a>
                 </td>
                 <td th:text="${m.name}"></td>
