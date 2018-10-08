@@ -1,6 +1,7 @@
 package oil.controller;
 
 import oil.listener.InitListener;
+import oil.model.Case;
 import oil.model.Type;
 import oil.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,16 @@ public class TypeController {
 
         typeService.save(type);
         ArrayList<Type> all = typeService.findAll();
+        for (Type typ:all){
+            List<Case> cases = type.getCases();
+            List<Case> cases1 = new ArrayList<>();
+            for (Case c:cases){
+                if (c.getIsExist()){
+                    cases1.add(c);
+                }
+            }
+            typ.setCases(cases1);
+        }
         InitListener.getApplicatonContext().getServletContext().setAttribute("types",all);
         return findAll(model);
     }

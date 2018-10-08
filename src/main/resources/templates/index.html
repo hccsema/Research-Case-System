@@ -50,11 +50,10 @@
                         <div>
                             <hr style=" height:1px;border:none;border-top:4px solid #911a0a;width: 50%;float:left;margin: 0"/>
                         </div>
-                        <a th:with="curCase=0" th:each="c,cStat:${m.cases}">
-                            <a  class="panel-body" th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
-                                <p th:if="${curCase<5}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
-                                <p th:if="${curCase<5}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
-                                <input type="hidden" th:with="curCase=${curCase+1}">
+                        <a th:each="c,cStat:${m.cases}">
+                            <a class="panel-body" th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
+                                <p th:if="${cStat.index<5}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
+                                <p th:if="${cStat.index<5}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
                             </a>
                         </a>
                     </div>
