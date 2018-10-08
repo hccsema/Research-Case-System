@@ -50,7 +50,10 @@
                 <td th:text="${m.name}"></td>
                 <td th:text="${m.author}"></td>
                 <td th:text="${m.type.name}"></td>
-                <td th:text="${m.tags}"></td>
+                <td>
+                    <span th:each="t:${m.tags}">
+                    <span th:text="${t.name}"></span>
+                </td>
                 <td th:text="${m.date}"></td>
             </tr>
             </tbody>

@@ -118,8 +118,8 @@ public class DocController {
     }
 
 
-    @PostMapping(value = "/remove")
-    public String remove(@RequestParam(value = "id")Doc doc){
+    @GetMapping(value = "/remove/{id}")
+    public String remove(@PathVariable(value = "id")Doc doc){
         Assert.notNull(doc,"文件不存在");
         Case aCase = doc.getACase();
         File file = new File(basePath + doc.getPath());
