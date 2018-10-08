@@ -235,10 +235,10 @@ public class CaseController {
         List<Case> cases = type.getCases();
         cases.add(c);
         type.setCases(cases);
-        typeService.save(type);
+
         c.setType(type);
         caseService.save(c);
-
+        typeService.save(type);
         model.addAttribute("msg","添加成功");
         return "admin/case_add";
     }
