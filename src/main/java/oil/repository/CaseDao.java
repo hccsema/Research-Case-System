@@ -6,6 +6,7 @@ import oil.model.Type;
 import oil.repository.result.DayAndCount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,7 +19,7 @@ import java.util.*;
  */
 public interface CaseDao extends JpaRepository<Case,Long> {
     Page<Case> findAllByIsExist(Boolean b,Pageable pageable);
-    List<Case> findAllByIsExist(Boolean b);
+    List<Case> findAllByIsExist(Boolean b, Sort sort);
     /**
      * 通过类别分页查找
      * @param pageable
