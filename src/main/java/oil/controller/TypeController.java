@@ -108,7 +108,7 @@ public class TypeController {
         typeService.save(type);
         ArrayList<Type> all = typeService.findAll();
         for (Type typ:all){
-            List<Case> cases = type.getCases();
+            List<Case> cases = typ.getCases();
             List<Case> cases1 = new ArrayList<>();
             for (Case c:cases){
                 if (c.getIsExist()){

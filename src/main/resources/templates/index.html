@@ -9,7 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/script/jquery.min.js}"></script>
     <script th:src="@{/script/bootstrap.min.js}"></script>
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">    <script>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
         function f() {
             var av = document.getElementById("myI").value;
             window.location.href="/search/"+av;
@@ -50,7 +52,7 @@
                             <hr style=" height:1px;border:none;border-top:4px solid #911a0a;width: 50%;float:left;margin: 0"/>
                         </div>
                         <a th:each="c,cStat:${m.cases}">
-                            <a class="panel-body" th:if="${c.isExist}" th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
+                            <a class="panel-body"  th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
                                 <p th:if="${cStat.index<5}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
                                 <p th:if="${cStat.index<5}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
                             </a>
