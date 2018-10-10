@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${#servletContext.getAttribute('lib').mainTitle}">Title</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/script/jquery.min.js}"></script>
     <script th:src="@{/script/bootstrap.min.js}"></script>
