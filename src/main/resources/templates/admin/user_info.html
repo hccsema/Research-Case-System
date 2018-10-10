@@ -6,11 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script th:src="@{/script/jquery.min.js}"></script>
     <script th:src="@{/script/bootstrap.min.js}"></script>
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/back-stage.css}">
 </head>
 <body>
@@ -21,11 +20,11 @@
         <h4 >用户信息</h4>
         <h4 th:text="${msg}" style="color: red"></h4>
     </div>
-    <form role="form" th:action="@{/user/change2}" method="post">
+
         <div class="row">
 
             <div class="col-lg-6">
-
+                <form role="form" th:action="@{/user/change2}" method="post">
                 <div class="form-group">
                     <label>序号</label>
                     <input class="form-control" name="#" disabled="disabled"  th:value="${user.id}">
@@ -43,23 +42,26 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="disabledSelect-sex">性别</label>
-                    <select id="disabledSelect-sex" class="form-control" name="sex" th:value="${user.sex}">
-                        <option value="男" th:selected="${user.sex == '男'}">男</option>
-                        <option value="女" th:selected="${user.sex == '女'}">女</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label>邮箱</label>
                     <input class="form-control" name="email" style="float: right" th:value="${user.email}">
                 </div>
+                <div style="margin-top: 20px">
+                    <button type="submit" class="btn btn-primary" >更新</button>
+                </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <form th:action="@{/user/}+${user.authorities.get(0).getId()==1?'remove_role':'give_role'}" method="post">
+                <div class="form-group">
+                    <label>权级</label>
+                    <input class="form-control" name="#" disabled="disabled"  th:value="(${user.authorities.get(0).getId()}==1)?'管理员':'普通用户'">
+                    <input class="form-control" name="id" type="hidden" th:value="${user.id}">
+                </div>
+                <button type="submit" class="btn btn-primary">授/降权</button>
+                </form>
             </div>
         </div>
-        <div style="margin-top: 20px">
-            <button type="submit" class="btn btn-primary" >更新</button>
-        </div>
-    </form>
+
 </div>
 
 </body>

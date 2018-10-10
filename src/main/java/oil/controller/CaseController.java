@@ -6,9 +6,11 @@ import oil.model.Doc;
 import oil.model.Tag;
 import oil.model.Type;
 import oil.service.CaseService;
+import oil.service.DocService;
 import oil.service.TagService;
 import oil.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +40,10 @@ public class CaseController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private DocService docService;
+    @Value("${doc.path}")
+    private String basePath;
 
     /**
      * 通过id获取
@@ -278,6 +285,62 @@ public class CaseController {
         }
 
         Case byId = caseService.findById(c.getId());
+        if (!c.getName().equals(byId.getName())){
+            List<Doc> contents = byId.getContents();
+            for (Doc doc:contents){
+                String path = doc.getPath();
+                String replace = path.replace( byId.getName(),c.getName());
+                doc.setPath(replace);
+                File file = new File(basePath+path);
+                File file1 = new File(basePath + replace);
+                creatDir(file1.getParentFile());
+                file.renameTo(file1);
+            }
+            byId.setContents(contents);
+
+            List<Doc> solves = byId.getSolves();
+            for (Doc doc:solves){
+                String path = doc.getPath();
+                String replace = path.replace(byId.getName(),c.getName());
+                doc.setPath(replace);
+                File file = new File(basePath+path);
+                File file1 = new File(basePath + replace);
+                creatDir(file1.getParentFile());
+                file.renameTo(file1);
+            }
+            byId.setSolves(solves);
+            docService.saveAll(contents);
+            docService.saveAll(solves);
+        }
+
+        if (!c.getType().getId().equals(byId.getType().getId())){
+            List<Doc> contents = byId.getContents();
+            for (Doc doc:contents){
+                String path = doc.getPath();
+                String replace = path.replace( byId.getType().getName(),c.getType().getName());
+                doc.setPath(replace);
+                File file = new File(basePath+path);
+                File file1 = new File(basePath + replace);
+                creatDir(file1.getParentFile());
+                file.renameTo(file1);
+            }
+            byId.setContents(contents);
+
+            List<Doc> solves = byId.getSolves();
+            for (Doc doc:solves){
+                String path = doc.getPath();
+                String replace = path.replace(byId.getType().getName(),c.getType().getName());
+                doc.setPath(replace);
+                File file = new File(basePath+path);
+                File file1 = new File(basePath + replace);
+                creatDir(file1.getParentFile());
+                file.renameTo(file1);
+            }
+            byId.setSolves(solves);
+            docService.saveAll(contents);
+            docService.saveAll(solves);
+        }
+
         c.setContents(byId.getContents());
         c.setSolves(byId.getSolves());
         c.setTimes(byId.getTimes());
@@ -286,6 +349,13 @@ public class CaseController {
         caseService.save(c);
         model.addAttribute("msg","变更成功");
         return "admin/case_change";
+    }
+
+    private void creatDir(File file){
+        while (!file.exists()){
+            creatDir(file.getParentFile());
+            file.mkdir();
+        }
     }
 
     @RolesAllowed("ROLE_ADMIN")

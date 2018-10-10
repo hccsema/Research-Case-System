@@ -1,6 +1,7 @@
 package oil.listener;
 
 
+import oil.model.Case;
 import oil.model.Lib;
 import oil.model.Tag;
 import oil.model.Type;
@@ -76,11 +77,22 @@ public class InitListener implements ServletContextListener {
         }
 
         sce.getServletContext().setAttribute("lib",lib);
+        sce.getServletContext().setAttribute("i",0);
     }
 
     private void initType(ServletContextEvent sce) {
         TypeService bean = applicationContext.getBean(TypeService.class);
         ArrayList<Type> all = bean.findAll();
+        for (Type type:all){
+            List<Case> cases = type.getCases();
+            List<Case> cases1 = new ArrayList<>();
+            for (Case c:cases){
+                if (c.getIsExist()){
+                    cases1.add(c);
+                }
+            }
+            type.setCases(cases1);
+        }
         sce.getServletContext().setAttribute("types",all);
     }
 

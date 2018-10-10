@@ -205,12 +205,12 @@ public class UserController {
      */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping(value = "/give_role")
-    public String giveRole(@RequestParam(name = "id") User user) {
+    public String giveRole(@RequestParam(name = "id") User user,Model model) {
         Role roleUser = roleService.getRole("ROLE_ADMIN");
         List<Role> authorities = (List<Role>) user.getAuthorities();
         authorities.add(roleUser);
         userDetailsService.save(user);
-        return "";
+        return getUser(user,model);
     }
 
     /**
@@ -220,12 +220,12 @@ public class UserController {
      */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping(value = "/remove_role")
-    public String removeRole(@RequestParam(name = "id") User user) {
+    public String removeRole(@RequestParam(name = "id") User user,Model model) {
         Role roleUser = roleService.getRole("ROLE_ADMIN");
         List<Role> authorities = (List<Role>) user.getAuthorities();
         authorities.remove(roleUser);
         userDetailsService.save(user);
-        return "";
+        return getUser(user,model);
     }
 
 
