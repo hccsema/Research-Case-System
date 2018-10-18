@@ -207,8 +207,9 @@ public class UserController {
     @PostMapping(value = "/give_role")
     public String giveRole(@RequestParam(name = "id") User user,Model model) {
         Role roleUser = roleService.getRole("ROLE_ADMIN");
-        List<Role> authorities = (List<Role>) user.getAuthorities();
+        List<Role> authorities = new ArrayList<>();
         authorities.add(roleUser);
+        user.setAuthorities(authorities);
         userDetailsService.save(user);
         return getUser(user,model);
     }
@@ -221,9 +222,10 @@ public class UserController {
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping(value = "/remove_role")
     public String removeRole(@RequestParam(name = "id") User user,Model model) {
-        Role roleUser = roleService.getRole("ROLE_ADMIN");
-        List<Role> authorities = (List<Role>) user.getAuthorities();
-        authorities.remove(roleUser);
+        Role roleUser = roleService.getRole("ROLE_USER");
+        List<Role> authorities = new ArrayList<>();
+        authorities.add(roleUser);
+        user.setAuthorities(authorities);
         userDetailsService.save(user);
         return getUser(user,model);
     }
