@@ -54,8 +54,8 @@
                     <input class="form-control" name="id" type="hidden" th:value="${case.id}">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" >确定变更</button>
-                        <a th:href="@{/case/remove/}+${case.id}">
-                            <button type="button" class="btn btn-primary"  onclick="Dalart()">删除案例</button>
+                        <a th:href="@{/case/remove/}+${case.id}" onclick="if(confirm('sure?')==false)return false;  ">
+                            <button type="button" class="btn btn-primary"  >删除案例</button>
                         </a>
                     </div>
                     <div class="form-group">
@@ -176,15 +176,5 @@
 
 </div>
 
-<script>
-    function Dalart(){
-        if (confirm("你确定删除此案例吗？")) {
-            alert("此案例将放入回收站");
-        }
-        else {
-            return false;
-        }
-    }
-</script>
 </body>
 </html>
