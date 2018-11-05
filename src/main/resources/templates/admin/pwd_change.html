@@ -52,7 +52,7 @@
             var repwd = $("#re_pwd").val();
             var oldpwd = $("#old_pwd").val();
         if(pwd.length<7 || pwd.length>32 || repwd.length<7 || repwd.length>32 ){
-            alert("密码长度不符合规则");
+            alert("密码长度不符合规则 \r\n 请输入7-32位密码");
             return false;
         }
         if(pwd !== repwd){

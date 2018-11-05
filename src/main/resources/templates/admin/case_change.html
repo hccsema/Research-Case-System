@@ -45,7 +45,7 @@
 
     <div class="row">
         <div class="page-header">
-            <h4>案例变更</h4>
+            <h4>案例变更 </h4> 
             <h4 th:text="${msg}" style="color: red"></h4>
         </div>
         <div class="panel-body">
@@ -54,7 +54,7 @@
                     <input class="form-control" name="id" type="hidden" th:value="${case.id}">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" >确定变更</button>
-                        <a th:href="@{/case/remove/}+${case.id}" onclick="if(confirm('sure?')==false)return false;  ">
+                        <a th:href="@{/case/remove/}+${case.id}" onclick="if(confirm('确定删除此案例?')==false)return false;  ">
                             <button type="button" class="btn btn-primary"  >删除案例</button>
                         </a>
                     </div>

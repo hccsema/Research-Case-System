@@ -14,60 +14,62 @@
 
 </head>
 
-<body class="login" mycollectionplug="bind">
-    <div class="login_m">
+<body  th:background="@{/images/xuexiaonanmen.jpg}">
+
+    <div class="login_m" >
 
         <div class="login_boder" style="margin-top: 250px">
 
-    <form th:action="@{/login}" method="post">
-        <div class="login_padding" id="login_model" style="padding-top: 20px">
-            <h1 style="margin: auto">教学案例库系统</h1>
+            <form th:action="@{/login}" method="post">
+                <div class="login_padding" id="login_model" style="padding-top: 20px">
+                    <h1 style="margin: auto">教学案例库系统</h1>
 
-            <p class="msg" th:if="${param.error}" style="color: red">用户名或密码错误</p>
+                    <p class="msg" th:if="${param.error}" style="color: red">用户名或密码错误</p>
 
-            <h2>用户名</h2>
-            <label>
-                <input type="text" id="username" name="username" class="txt_input txt_input2" onfocus="if (value ==&#39;请输入用户名和密码&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;请输入用户名和密码&#39;}" value="请输入用户名和密码">
-            </label>
-            <h2>密码</h2>
-            <label>
-                <input type="password" name="password" id="userpwd" class="txt_input">
-            </label>
+                    <h2>用户名</h2>
+                    <label>
+                        <input type="text" id="username" name="username" class="txt_input txt_input2"  placeholder="请输入用户名">
+                    </label>
+                    <h2>密码</h2>
+                    <label>
+                        <input type="password" name="password" id="userpwd" class="txt_input" placeholder="请输入密码">
+                    </label>
 
-            <div class="rem_sub">
+                    <div class="rem_sub">
+                        <label>
+                            <input type="submit" class="sub_button" name="button" id="button" value="登录" style="opacity: 0.5;margin-top: 20px">
+                        </label>
+                    </div>
+
+                </div>
+            </form>
+
+
+            <div id="forget_model" class="login_padding" style="display:none">
+            <br>
+
+               <h1>Forgot password</h1>
+               <br>
+               <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
                 <label>
-                    <input type="submit" class="sub_button" name="button" id="button" value="登录" style="opacity: 0.5;margin-top: 20px">
+                <input type="text" id="usrmail" class="txt_input txt_input2">
+               </label>
+
+
+              <div class="rem_sub">
+              <div class="rem_sub_l">
+               </div>
+                <label>
+                 <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
+                 　　　
+                 <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
+
                 </label>
+              </div>
             </div>
 
+
         </div>
-    </form>
-
-
-    <div id="forget_model" class="login_padding" style="display:none">
-    <br>
-
-       <h1>Forgot password</h1>
-       <br>
-       <div class="forget_model_h2">(Please enter your registered email below and the system will automatically reset users’ password and send it to user’s registered email address.)</div>
-        <label>
-        <input type="text" id="usrmail" class="txt_input txt_input2">
-       </label>
-
-
-      <div class="rem_sub">
-      <div class="rem_sub_l">
-       </div>
-        <label>
-         <input type="submit" class="sub_buttons" name="button" id="Retrievenow" value="Retrieve now" style="opacity: 0.7;">
-         　　　
-         <input type="submit" class="sub_button" name="button" id="denglou" value="Return" style="opacity: 0.7;">　　
-
-        </label>
-      </div>
     </div>
-
-
-
 </body>
 </html>
