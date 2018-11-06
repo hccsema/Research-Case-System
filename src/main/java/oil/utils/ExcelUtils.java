@@ -49,7 +49,7 @@ public class ExcelUtils {
     XSSFRow titleCell = xssfSheet.getRow(0);
     System.out.println(getValue(titleCell.getCell(0)));
 
-    for (int i = 2; i <= xssfSheet.getLastRowNum() ; i++) {
+    for (int i = 1; i <= xssfSheet.getLastRowNum() ; i++) {
       XSSFRow row = xssfSheet.getRow(i);
       User member = new User();
 
