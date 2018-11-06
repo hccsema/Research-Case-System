@@ -26,7 +26,7 @@ public class Type implements Serializable {
      */
     private Integer grade;
     @OrderBy("date desc ")
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "type",fetch = FetchType.EAGER)
     private List<Case> cases=new ArrayList<>();
 
     @Override

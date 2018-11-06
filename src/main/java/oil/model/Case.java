@@ -26,7 +26,7 @@ public class Case implements Serializable {
     @Column(length = 500)
     private String introduction;
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne()
     private Type type;
     private Boolean isExist;
     private Date date;

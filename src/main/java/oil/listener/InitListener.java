@@ -85,6 +85,11 @@ public class InitListener implements ServletContextListener {
         ArrayList<Type> all = bean.findAll();
         for (Type type:all){
             List<Case> cases = type.getCases();
+            if (cases.size() > 0) {
+                if (!type.getId().equals(cases.get(0).getType().getId())) {
+                    cases = bean.findById(type.getId()).getCases();
+                }
+            }
             List<Case> cases1 = new ArrayList<>();
             for (Case c:cases){
                 if (c.getIsExist()){
