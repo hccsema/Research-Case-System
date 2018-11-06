@@ -1,7 +1,9 @@
 package oil.utils;
 
 
+import oil.model.Role;
 import oil.model.User;
+import oil.service.RoleService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -12,6 +14,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,26 +34,45 @@ import java.util.List;
 @Component
 public class ExcelUtils {
 
+  @Autowired
+  private RoleService roleService;
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
   public List<User> getList(InputStream file) throws IOException, InvalidFormatException {
     List<User> users = new LinkedList<>();
-    XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
+
+      XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
+
     XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
     XSSFRow titleCell = xssfSheet.getRow(0);
     System.out.println(getValue(titleCell.getCell(0)));
 
-    for (int i = 2; i <= xssfSheet.getLastRowNum() - 1; i++) {
+    for (int i = 2; i <= xssfSheet.getLastRowNum() ; i++) {
       XSSFRow row = xssfSheet.getRow(i);
       User member = new User();
 
 
       member.setUserName(getStringValue(xssfSheet, row.getCell(0)));
-
+      if ("".equals(member.getUsername())) {
+        continue;
+      }
       member.setNickName(getStringValue(xssfSheet, row.getCell(1)));
 
       member.setSex(getStringValue(xssfSheet, row.getCell(2)));
-      member.setEmail(getStringValue(xssfSheet, row.getCell(3)));
-
-
+      String stringValue = getStringValue(xssfSheet, row.getCell(3));
+      if ("".equals(stringValue)) {
+        stringValue = member.getUsername() + "@s.upc.edu.cn";
+      }
+      member.setEmail(stringValue);
+      Role roleUser = roleService.getRole("ROLE_USER");
+      LinkedList<Role> objects = new LinkedList<>();
+      objects.add(roleUser);
+      member.setAuthorities(objects);
+      member.setNonLocked(true);
+      member.setNonExpired(true);
+      member.setPassWord(bCryptPasswordEncoder.encode(member.getUsername()));
       users.add(member);
 
     }
