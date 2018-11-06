@@ -86,7 +86,11 @@ public class User implements UserDetails , Serializable {
         return true;
     }
 
-    @Override
+  public void setSex(String stringValue) {
+        this.sex = Sex.valueOf(stringValue);
+  }
+
+  @Override
     public String toString() {
         return "User{" +
                 "id=" + id +

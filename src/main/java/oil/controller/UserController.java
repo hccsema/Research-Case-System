@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,14 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private RoleService roleService;
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @PostMapping(value = "/import")
+    public String importUser(@RequestParam("file") MultipartFile file){
+
+        return "";
+    }
 
     /**
      * 添加用户
