@@ -80,7 +80,7 @@
             </div>
             <div class="panel-body" style="height: 390px">
                 <a th:each="t:${top}">
-                    <a th:text="${t.name}" th:href="@{'/case/'+${t.id}+'/case_info.html'}"></a><br/>
+                    <a th:text="${#strings.abbreviate(t.name,18)}" th:href="@{'/case/'+${t.id}+'/case_info.html'}"></a><br/>
                 </a>
             </div>
         </div>
