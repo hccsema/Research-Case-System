@@ -39,7 +39,7 @@ public class Case implements Serializable {
     private String unit;
     @ManyToMany
     private List<Tag> tags=new ArrayList<>();
-    @Column(length = 1000)
+    @Column(length = 2000)
     private String summary;
     @JsonIgnore
     @OneToMany
