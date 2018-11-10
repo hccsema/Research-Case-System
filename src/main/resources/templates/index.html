@@ -53,7 +53,7 @@
                         </div>
                         <a th:each="c,cStat:${m.cases}">
                             <a class="panel-body" th:if="${c.isExist}" th:href="@{'/case/'+${c.id}+'/case_info.html'}"  style="padding-left: 2%;padding-top: 0.1%;padding-bottom: 0.1%">
-                                <p th:if="${cStat.index<5}" th:text="${c.name}" style="float: left;margin-left: 5px"></p>
+                                <p th:if="${cStat.index<5}" th:text="${#strings.abbreviate(c.name,25)}"  style="float: left;margin-left: 5px"></p>
                                 <p th:if="${cStat.index<5}" th:text="'['+${#dates.format(c.date,'yyyy-MM-dd')}+']'" style="float: right;margin-right: 5px"></p>
                             </a>
                         </a>
