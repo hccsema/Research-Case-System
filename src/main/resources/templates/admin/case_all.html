@@ -62,10 +62,14 @@
 </body>
 <script>
 
-    $(document).ready( function () {
-        $('#table-user').DataTable();
-    } );
+    // $(document).ready( function () {
+    //     $('#table-user').DataTable({
+    //     });
+    // } );
     $('#table-user').DataTable({
+        bsort:false,
+        order:[5,'decs'],
+
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",
