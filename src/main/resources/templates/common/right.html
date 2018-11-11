@@ -56,7 +56,7 @@
                 <h3 class="panel-title">日期归档</h3>
             </div>
             <div style="float: left;width: 5%;height: 15px;margin-top: 11px"></div>
-            <div class="panel-body" style="float: left;width: 95%">
+            <div class="panel-body" style="float: left;width: 95%;height: 100px;overflow-x: auto">
                 <a th:each="count:${#servletContext.getAttribute('countByDate')}">
                     <a th:href="@{'/case/'+${count.getDays()}+'/date.html'}" th:text="${count.getDays()}+' ['+${count.getCount()}+']'"></a><br/>
                 </a>

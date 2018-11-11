@@ -106,7 +106,7 @@ public class CaseService {
     }
 
     public List<Case> findAllByIsExist(Boolean b){
-        return caseDao.findAllByIsExist(b,Sort.by(Sort.Order.asc("date")));
+        return caseDao.findAllByIsExist(b,Sort.by(Sort.Order.desc("id")));
     }
 
 }
