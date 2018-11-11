@@ -1,6 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://59.110.163.243:3306/oil?characterEncoding=utf8&useSSL=false
+#    url: jdbc:mysql://127.0.0.1:3306/oil?characterEncoding=utf8&useSSL=false
     username: oil
     password: 690818
     #    username: root
@@ -32,6 +33,7 @@ spring:
     prefix: classpath:/templates/
     encoding: utf-8
     suffix: .html
+#    cache: true
     cache: false
   jpa:
     show-sql: true
@@ -69,12 +71,14 @@ spring:
 
 doc:
   path: /home/waiter/Desktop/hhhh
-
+#  path: /www/wwwroot/oil/hhhh
 
 logging:
-  #file: water.log
-  #path: /home/waiter/logs
+#  file: oil.log
+#  path: /www/wwwroot/oil
   level:
     org: warn
     org.springframework: warn
     oil: trace
+#server:
+#  port: 8081
